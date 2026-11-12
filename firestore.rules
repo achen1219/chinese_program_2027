@@ -1,0 +1,18 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /families/{code} {
+      allow read, write: if request.auth != null
+                         && code.matches('^[A-Z2-9]{6}$');
+    }
+    // AP中文備考室: cross-device sync. One record per 12-character sync code.
+    match /apzh/{code} {
+      allow get, write: if request.auth != null
+                        && code.matches('^[A-Z2-9]{12}$');
+      match /months/{month} {
+        allow read, write: if request.auth != null
+                           && code.matches('^[A-Z2-9]{12}$');
+      }
+    }
+  }
+}
