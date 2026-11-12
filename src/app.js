@@ -46,12 +46,12 @@ const samplePromise = useCap('sample').then(s => { aiState = s ? 'ready' : 'off'
 
 /* ---------- store: shared db when available, else this browser ---------- */
 const Store = {
-  db: null, mode: 'local', ready: !IN_VIEWER, attempts: [], checks: {}, subs: new Set(),
+  db: null, mode: 'local', ready: !IN_VIEWER, attempts: [], checks: {}, unchecks: {}, dels: {}, subs: new Set(),
   init() {
-    this.attempts = load('apzh.attempts', []);
-    this.checks = load('apzh.checks', {});
+    this.loadLocal();
+    this.ready = !IN_VIEWER && !Sync.first;
     useCap('db').then(db => {
-      if (!db) { this.ready = true; this.emit(); return; }
+      if (!db) { this.ready = !Sync.first; this.emit(); return; }
       this.db = db; this.mode = 'db';
       db.collection('attempts').orderBy('ts', 'desc').limit(600).onSnapshot(snap => {
         this.attempts = snap.docs.map(d => Object.assign({ id: d.id }, d.data()));
@@ -66,8 +66,9 @@ const Store = {
       this.emit();
     });
   },
-  fallback() { this.db = null; this.mode = 'local'; this.ready = true; this.attempts = load('apzh.attempts', []); this.checks = load('apzh.checks', {}); this.emit(); },
-  persistLocal() { save('apzh.attempts', this.attempts.slice(0, 600)); save('apzh.checks', this.checks); },
+  loadLocal() { this.attempts = load('apzh.attempts', []); this.checks = load('apzh.checks', {}); this.unchecks = load('apzh.unchecks', {}); this.dels = load('apzh.dels', {}); },
+  fallback() { this.db = null; this.mode = 'local'; this.ready = true; this.loadLocal(); this.emit(); },
+  persistLocal() { save('apzh.attempts', this.attempts.slice(0, 5000)); save('apzh.checks', this.checks); save('apzh.unchecks', this.unchecks); save('apzh.dels', this.dels); },
   on(fn) { this.subs.add(fn); },
   emit() { this.subs.forEach(f => f()); },
   async add(a) {
@@ -76,26 +77,27 @@ const Store = {
       try { const ref = this.db.collection('attempts').doc(); await ref.set(a); afterAttempt(a.ref); return ref.id; }
       catch (e) { toast('雲端儲存失敗，改存在這台裝置'); this.fallback(); }
     }
-    a.id = 'local-' + a.ts + Math.random().toString(36).slice(2, 6);
-    this.attempts.unshift(a); this.persistLocal(); this.emit(); afterAttempt(a.ref); return a.id;
+    a.id = 'local-' + a.ts + Math.random().toString(36).slice(2, 6); a.u = a.ts;
+    this.attempts.unshift(a); this.persistLocal(); this.emit(); Sync.touch(); afterAttempt(a.ref); return a.id;
   },
   async update(id, patch) {
     if (this.db && !String(id).startsWith('local-')) {
       try { await this.db.collection('attempts').doc(id).update(patch); return; } catch (e) { toast('更新失敗，請再試一次'); return; }
     }
-    const a = this.attempts.find(x => x.id === id); if (a) Object.assign(a, patch);
-    this.persistLocal(); this.emit();
+    const a = this.attempts.find(x => x.id === id); if (a) Object.assign(a, patch, { u: Date.now() });
+    this.persistLocal(); this.emit(); Sync.touch();
   },
   async remove(id) {
     if (this.db && !String(id).startsWith('local-')) { try { await this.db.collection('attempts').doc(id).delete(); } catch (e) { toast('刪除失敗'); } return; }
-    this.attempts = this.attempts.filter(x => x.id !== id); this.persistLocal(); this.emit();
+    this.dels[id] = Date.now();
+    this.attempts = this.attempts.filter(x => x.id !== id); this.persistLocal(); this.emit(); Sync.touch();
   },
   async toggle(key) {
     const done = Object.assign({}, this.checks);
-    if (done[key]) delete done[key]; else done[key] = Date.now();
+    if (done[key]) { delete done[key]; this.unchecks[key] = Date.now(); } else { done[key] = Date.now(); delete this.unchecks[key]; }
     this.checks = done; this.emit();
     if (this.db) { try { await this.db.doc('progress/checks').set({ done }); } catch (e) { toast('勾選沒有存到雲端'); } }
-    else this.persistLocal();
+    else { this.persistLocal(); Sync.touch(); }
   },
   best(ref) {
     const xs = this.attempts.filter(a => a.ref === ref && typeof a.score === 'number' && a.total);
@@ -104,6 +106,170 @@ const Store = {
   },
   count(ref) { return this.attempts.filter(a => a.ref === ref).length; }
 };
+
+/* ---------- cross-device sync (phone site only) ----------
+   Every device keeps its own copy and works offline. When there is a connection, the copies are
+   merged record by record through Firestore (REST, anonymous sign-in), under a 12-character code:
+     apzh/{code}                  meta: checkboxes, deletions, today's commute picks
+     apzh/{code}/months/{YYYY-MM} that month's attempts
+   Newest edit of a record wins; deletions and un-ticks are kept as tombstones so they stick. */
+const stable = o => JSON.stringify(o, (k, v) => (v && typeof v === 'object' && !Array.isArray(v)) ? Object.keys(v).sort().reduce((r, key) => { r[key] = v[key]; return r; }, {}) : v);
+const localMeta = () => ({ checks: Store.checks, unchecks: Store.unchecks, dels: Store.dels, commute: load('apzh.commute', null) });
+function mergeMeta(a, b) {
+  const checks = {}, unchecks = {};
+  new Set([a.checks, a.unchecks, b.checks, b.unchecks].flatMap(o => Object.keys(o || {}))).forEach(k => {
+    const c = Math.max((a.checks || {})[k] || 0, (b.checks || {})[k] || 0);
+    const u = Math.max((a.unchecks || {})[k] || 0, (b.unchecks || {})[k] || 0);
+    if (c > u) checks[k] = c; else if (u) unchecks[k] = u;
+  });
+  let commute = a.commute || b.commute || null;
+  if (a.commute && b.commute) commute = b.commute.date >= a.commute.date ? b.commute : a.commute;
+  return { checks, unchecks, dels: Object.assign({}, b.dels || {}, a.dels || {}), commute };
+}
+const Sync = {
+  st: load('apzh.sync', {}), status: 'off', detail: '', busy: false, again: false, timer: null, first: false,
+  get on() { return !IN_VIEWER && !!this.st.code; },
+  saveState() { save('apzh.sync', this.st); },
+  newCode() { const b = new Uint8Array(12); crypto.getRandomValues(b); return Array.from(b, x => 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'[x % 32]).join(''); },
+  pretty(code) { return String(code || '').replace(/(.{4})(?=.)/g, '$1-'); },
+  clean(text) { return String(text || '').toUpperCase().replace(/[^A-Z0-9]/g, ''); },
+  valid(code) { return /^[A-Z2-9]{12}$/.test(code); },
+  start(code) { this.st = { code, seen: {}, sig: {}, auth: this.st.auth }; this.saveState(); this.run(); },
+  // Joining checks that the code exists first, so a typo cannot quietly start a second, empty record.
+  async join(code) {
+    const had = this.st;
+    this.st = { code, seen: {}, sig: {}, auth: had.auth };
+    try {
+      const doc = await this.req('GET', '/apzh/' + code);
+      if (!doc) { this.st = Object.assign({}, had, { auth: this.st.auth }); this.saveState(); return 'missing'; }
+    } catch (e) { this.st = Object.assign({}, had, { auth: this.st.auth }); this.saveState(); return (e && e.http === 403) ? 'denied' : 'offline'; }
+    this.saveState(); this.run(); return 'ok';
+  },
+  stop() { clearTimeout(this.timer); this.st = {}; this.saveState(); this.status = 'off'; },
+  setStatus(s, detail) { this.status = s; this.detail = detail || ''; $$('[data-sync-status]').forEach(el => { el.innerHTML = this.statusHTML(); }); },
+  statusHTML() {
+    const s = this.status;
+    if (s === 'syncing') return '<span class="chip">同步中…</span>';
+    if (s === 'ok') return `<span class="chip ok">已同步 ${fmtTs(this.st.last || Date.now()).split(' ')[1]}</span>`;
+    if (s === 'offline') return '<span class="chip warn">離線：連上網路後自動同步</span>';
+    if (s === 'denied') return '<span class="chip bad">雲端拒絕存取</span> <span class="small muted">請家長確認 Firebase 規則已經發布。</span>';
+    if (s === 'error') return `<span class="chip bad">同步失敗</span> <span class="small muted">${esc(this.detail)}</span>`;
+    return '';
+  },
+  touch() { if (!this.on) return; clearTimeout(this.timer); this.timer = setTimeout(() => this.run(), 1500); },
+  endFirst() { if (!this.first) return; this.first = false; if (Store.mode === 'local' && !Store.ready) { Store.ready = true; Store.emit(); } },
+  boot() {
+    if (IN_VIEWER) return;
+    window.addEventListener('online', () => this.run());
+    document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible' && Date.now() - (this.st.last || 0) > 60000) this.run(); });
+    // Another tab of this site changed the saved data: pick it up.
+    window.addEventListener('storage', e => { if (e.key && e.key.indexOf('apzh.') !== 0) return; if (Store.mode === 'local') Store.loadLocal(); this.st = load('apzh.sync', {}); Store.emit(); });
+    if (this.on) { setTimeout(() => this.endFirst(), 8000); this.run(); }
+  },
+  // One sign-in at a time, even when several requests start together.
+  token() {
+    if (!this.tokP) this.tokP = this.fetchToken().finally(() => { this.tokP = null; });
+    return this.tokP;
+  },
+  async fetchToken() {
+    const a = this.st.auth || {}, key = D.firebase.apiKey;
+    if (a.idToken && a.exp > Date.now() + 60000) return a.idToken;
+    if (a.refreshToken) {
+      const r = await fetch('https://securetoken.googleapis.com/v1/token?key=' + key, { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: 'grant_type=refresh_token&refresh_token=' + encodeURIComponent(a.refreshToken) });
+      if (r.ok) { const j = await r.json(); this.st.auth = { idToken: j.id_token, refreshToken: j.refresh_token, exp: Date.now() + Number(j.expires_in) * 1000 }; this.saveState(); return j.id_token; }
+    }
+    const r = await fetch('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' + key, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ returnSecureToken: true }) });
+    if (!r.ok) { const err = new Error('登入雲端失敗（' + r.status + '）'); err.http = r.status; err.stage = 'auth'; throw err; }
+    const j = await r.json();
+    this.st.auth = { idToken: j.idToken, refreshToken: j.refreshToken, exp: Date.now() + Number(j.expiresIn) * 1000 };
+    this.saveState(); return j.idToken;
+  },
+  async req(method, path, body, query, retried) {
+    const tok = await this.token();
+    const url = 'https://firestore.googleapis.com/v1/projects/' + D.firebase.projectId + '/databases/(default)/documents' + path + (query ? '?' + query : '');
+    const r = await fetch(url, { method, headers: Object.assign({ Authorization: 'Bearer ' + tok }, body ? { 'Content-Type': 'application/json' } : {}), body: body ? JSON.stringify(body) : undefined });
+    if (r.status === 404) return null;
+    if (r.status === 401 && !retried) { this.st.auth = Object.assign({}, this.st.auth, { idToken: null }); return this.req(method, path, body, query, true); }
+    if (!r.ok) { let status = ''; try { status = (await r.json()).error.status; } catch (e) { /* not JSON */ } const err = new Error(status || 'HTTP ' + r.status); err.http = r.status; err.status = status; throw err; }
+    return r.json();
+  },
+  async run() {
+    if (!this.on) { this.endFirst(); return; }
+    if (this.busy) { this.again = true; return; }
+    if (navigator.onLine === false) { this.setStatus('offline'); this.endFirst(); return; }
+    this.busy = true; this.setStatus('syncing');
+    try { await this.cycle(); this.st.last = Date.now(); this.saveState(); this.setStatus('ok'); }
+    catch (e) {
+      if (e && e.http === 403 && e.stage !== 'auth') this.setStatus('denied');
+      else if (e instanceof TypeError || navigator.onLine === false) this.setStatus('offline');
+      else this.setStatus('error', (e && e.message) || '');
+    }
+    finally { this.busy = false; this.endFirst(); if (this.again) { this.again = false; this.touch(); } }
+  },
+  async cycle() {
+    const st = this.st, base = '/apzh/' + st.code;
+    st.seen = st.seen || {}; st.sig = st.sig || {};
+    const monthOf = a => new Date(a.ts).toISOString().slice(0, 7);
+    const sigOf = list => list.map(a => a.id + ':' + (a.u || a.ts)).sort().join('|');
+    const text = (doc, f) => (doc && doc.fields && doc.fields[f] && doc.fields[f].stringValue) || '';
+
+    // 1. What the cloud holds: the meta record, and when each month last changed.
+    const [metaDoc, listing] = await Promise.all([
+      this.req('GET', base),
+      this.req('GET', base + '/months', null, 'pageSize=100&mask.fieldPaths=n').catch(e => { if (e && e.http === 400) return this.req('GET', base + '/months', null, 'pageSize=100'); throw e; })
+    ]);
+    const cloudMeta = text(metaDoc, 'meta') ? JSON.parse(text(metaDoc, 'meta')) : {};
+    const cloudMonths = {};
+    ((listing && listing.documents) || []).forEach(d => { cloudMonths[d.name.split('/').pop()] = d.updateTime; });
+
+    // 2. Download only the months that changed since this device last looked.
+    const fetched = {};
+    await Promise.all(Object.keys(cloudMonths).filter(m => cloudMonths[m] !== st.seen[m]).map(async m => {
+      const d = await this.req('GET', base + '/months/' + m);
+      fetched[m] = text(d, 'data') ? JSON.parse(text(d, 'data')) : [];
+      if (d) cloudMonths[m] = d.updateTime;
+    }));
+
+    // 3. Merge and save locally in one step (no waiting in between, so nothing typed meanwhile is lost).
+    const before = sigOf(Store.attempts) + stable(localMeta());
+    const meta = mergeMeta(localMeta(), cloudMeta);
+    const byId = new Map();
+    const put = a => { const b = byId.get(a.id); if (!b || (a.u || a.ts) > (b.u || b.ts)) byId.set(a.id, a); };
+    Store.attempts.forEach(put);
+    Object.keys(fetched).forEach(m => fetched[m].forEach(put));
+    const merged = Array.from(byId.values()).filter(a => !meta.dels[a.id]).sort((a, b) => b.ts - a.ts);
+    Store.attempts = merged; Store.checks = meta.checks; Store.unchecks = meta.unchecks; Store.dels = meta.dels;
+    if (meta.commute) save('apzh.commute', meta.commute);
+    Store.persistLocal();
+    if (sigOf(merged) + stable(meta) !== before) Store.emit();
+
+    // 4. Upload the months whose merged content differs from the cloud's, then the meta record.
+    const groups = {};
+    merged.forEach(a => { const m = monthOf(a); (groups[m] = groups[m] || []).push(a); });
+    for (const m of new Set(Object.keys(groups).concat(Object.keys(cloudMonths)))) {
+      const list = groups[m] || [], mine = sigOf(list);
+      const theirs = m in fetched ? sigOf(fetched[m]) : (m in cloudMonths ? st.sig[m] : null);
+      if (mine === theirs) { st.seen[m] = cloudMonths[m]; st.sig[m] = mine; continue; }
+      const d = await this.req('PATCH', base + '/months/' + m, { fields: { data: { stringValue: JSON.stringify(list) }, n: { integerValue: String(list.length) } } });
+      st.seen[m] = d.updateTime; st.sig[m] = mine;
+    }
+    if (!metaDoc || stable(meta) !== stable(mergeMeta({}, cloudMeta))) {
+      await this.req('PATCH', base, { fields: { meta: { stringValue: JSON.stringify(meta) }, app: { stringValue: 'apzh' } } });
+    }
+  }
+};
+function syncCard() {
+  if (IN_VIEWER || Store.mode !== 'local') return '';
+  if (!Sync.on) return `<div class="card" id="synccard"><b>在手機和電腦之間同步</b>
+    <p class="small muted">開啟後，進度會存到雲端。在另一台裝置輸入同一組同步碼，就會看到同一份紀錄；家長也可以用同一組同步碼查看和寫評語。</p>
+    <div class="row"><button class="btn primary" data-act="syncnew">開啟同步</button></div>
+    <div class="row"><label for="synccode" class="small muted">已經有同步碼：</label><input class="field" id="synccode" style="max-width:13em" placeholder="XXXX-XXXX-XXXX" autocapitalize="characters" autocomplete="off" spellcheck="false"><button class="btn" data-act="syncjoin">連結</button></div>
+    <div class="small" id="syncmsg" style="color:var(--red)"></div></div>`;
+  return `<div class="card" id="synccard"><div class="row"><b>跨裝置同步</b><span data-sync-status>${Sync.statusHTML()}</span></div>
+    <div class="row"><span class="small muted">同步碼</span><code class="synccode">${esc(Sync.pretty(Sync.st.code))}</code><button class="btn" data-act="synccopy">複製</button></div>
+    <p class="small muted">在另一台裝置打開這個網站，到「紀錄」輸入這組同步碼。同步碼就是鑰匙，不要公開。</p>
+    <div class="row"><button class="btn" data-act="syncnow">立即同步</button><button class="btn ghost danger" data-act="syncoff">在這台裝置停止同步</button></div></div>`;
+}
 
 /* ---------- speech synthesis ---------- */
 const TTS = {
@@ -231,6 +397,22 @@ const GLOBAL = {
   share: el => { const a = findAttempt(el.dataset.id); if (a) shareText('AP中文練習', attemptShareText(a)); },
   copyprompt: el => { const a = findAttempt(el.dataset.id); if (a) copyText(aiPrompt(a, true), '已複製，貼給 Claude 就能批改'); },
   hidehint: () => { save('apzh.hint', 1); const h = $('#ihint'); if (h) h.remove(); },
+  syncnew: () => { Sync.start(Sync.newCode()); refresh(); },
+  syncjoin: async el => {
+    const code = Sync.clean($('#synccode').value), msg = $('#syncmsg');
+    if (!Sync.valid(code)) { msg.textContent = '同步碼是 12 個英文字母和數字（沒有 0 和 1）。'; return; }
+    el.disabled = true; msg.textContent = '連結中…';
+    const r = await Sync.join(code);
+    if (r === 'ok') { refresh(); return; }
+    el.disabled = false;
+    msg.textContent = r === 'missing' ? '找不到這組同步碼，請檢查有沒有打錯。' : r === 'denied' ? '雲端拒絕存取，請家長確認 Firebase 規則已經發布。' : '連不上雲端，請確認有網路後再試一次。';
+  },
+  synccopy: () => copyText(Sync.pretty(Sync.st.code), '同步碼已複製'),
+  syncnow: () => Sync.run(),
+  syncoff: el => {
+    if (!el.dataset.armed) { el.dataset.armed = '1'; el.textContent = '確定停止？再按一次'; setTimeout(() => { if (el.isConnected) { delete el.dataset.armed; el.textContent = '在這台裝置停止同步'; } }, 4000); return; }
+    Sync.stop(); refresh();
+  },
   say: el => { TTS.stop(); TTS.say([{ text: el.dataset.say || el.textContent.replace(/……/g, '，'), g: 'f' }], { rate: 0.95 }); }
 };
 function setTab(t) {
@@ -398,7 +580,7 @@ function commutePicks() {
     n % 2 ? { k: 'story', id: nextFrom(D.stories, 'S'), min: 15 } : { k: 'email', id: nextFrom(D.emails, 'E'), min: 15 },
     { k: 'auth', id: 'AUTH-' + src.id, min: src.min }
   ];
-  if (Store.ready) save('apzh.commute', { date: today, items });
+  if (Store.ready) { save('apzh.commute', { date: today, items }); Sync.touch(); }
   return items;
 }
 function doneToday(id, extra) {
@@ -512,7 +694,9 @@ function taskRow(key, text) {
   return `<div class="task ${done ? 'done' : ''}"><button class="cb" role="checkbox" aria-checked="${done}" aria-label="完成" data-act="check" data-key="${key}"></button><div class="txt">${linkify(text)}</div></div>`;
 }
 function storageNote() {
-  return Store.mode === 'db' ? '紀錄和勾選存在雲端：家長和孩子打開同一個連結，看到的是同一份。' : '紀錄和勾選存在這台裝置的瀏覽器裡。';
+  if (Store.mode === 'db') return '紀錄和勾選存在雲端：家長和孩子打開同一個連結，看到的是同一份。';
+  if (Sync.on) return '紀錄存在這台裝置，並和使用同一組同步碼的裝置同步。';
+  return IN_VIEWER ? '紀錄和勾選存在這台裝置的瀏覽器裡。' : '紀錄和勾選只存在這台裝置。到「紀錄」可以開啟跨裝置同步。';
 }
 
 VIEW.plan = () => {
@@ -703,6 +887,7 @@ VIEW.log = () => {
   main.innerHTML = `
   <section class="section">
     <div class="section-head"><h2>紀錄</h2><span class="small muted">${storageNote()}</span></div>
+    ${syncCard()}
     <div class="tiles">
       <div class="tile"><span class="v num">${A.filter(a => a.ts >= monday).length}</span><span class="k">本週完成的練習</span></div>
       <div class="tile"><span class="v num">${avg('listening')}</span><span class="k">聽力平均正確率</span></div>
@@ -1173,7 +1358,9 @@ function boot() {
   hdr(); window.addEventListener('resize', hdr);
   TTS.init();
   Store.on(refresh);
+  Sync.first = Sync.on && navigator.onLine !== false;
   Store.init();
+  Sync.boot();
   samplePromise.then(() => { if (!S.run && (S.tab === 'write' || S.tab === 'log')) refresh(); });
   render(false);
 }

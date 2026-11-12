@@ -319,3 +319,5 @@ main, .top-in { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding
   .tabs { margin: 0; padding: 0; }
   .tab { flex: 1 1 auto; padding: 8px 2px 9px; font-size: .95rem; text-align: center; }
 }
+
+.synccode { font-family: var(--mono); font-size: 1.15rem; font-weight: 700; letter-spacing: .06em; padding: 4px 10px; border-radius: 8px; background: var(--surface-2); user-select: all; }

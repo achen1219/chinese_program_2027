@@ -14,6 +14,22 @@ screen, works offline, and keeps progress on the device.
 | `build.py` | Assembles `src/` into the files above |
 | `make_icons.ps1` | Redraws `icons/` |
 
+## Sync between devices
+
+Each device keeps its own copy of the progress and works offline. Turning on sync (紀錄 tab)
+creates a 12-character sync code; entering that code on another device merges the two copies
+through Firestore, record by record. Config is in `src/data_sync.js`; the logic is the `Sync`
+object in `src/app.js`. The Firestore rules must allow it:
+
+```
+match /apzh/{code} {
+  allow get, write: if request.auth != null && code.matches('^[A-Z2-9]{12}$');
+  match /months/{month} {
+    allow read, write: if request.auth != null && code.matches('^[A-Z2-9]{12}$');
+  }
+}
+```
+
 ## Build
 
 ```bash

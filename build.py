@@ -13,7 +13,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).parent
 SRC = ROOT / "src"
-DATA = ["data_plan.js", "data_listening.js", "data_reading.js", "data_writing.js", "data_speaking.js", "data_toolkit.js"]
+DATA = ["data_plan.js", "data_listening.js", "data_reading.js", "data_writing.js", "data_speaking.js", "data_toolkit.js", "data_sync.js"]
 SITE_FILES = ["index.html", "sw.js", "manifest.webmanifest", "icons"]
 
 PWA_HEAD = """<meta name="robots" content="noindex">
