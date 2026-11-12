@@ -217,6 +217,7 @@ details.week.now { background: var(--accent-soft); border-radius: 8px; padding-i
 .bg-sunset { background: linear-gradient(#f7b27a 0 22%, #ef8f6d 42%, #3d7fa8 42% 56%, #e6c78c 56%); }
 .bg-dawn { background: linear-gradient(#ffd7a6 0 28%, #c3e2f2 60%, #8cc56f 60%); }
 .bg-track { background: repeating-linear-gradient(0deg, #c4553f 0 9%, #e9e2dc 9% 10%), linear-gradient(#bfe3f5 0 48%, #8cc56f 48%); background-size: 100% 42%, 100% 100%; background-position: bottom, top; background-repeat: no-repeat; }
+.bg-stage { background: repeating-linear-gradient(90deg, rgba(0,0,0,.14) 0 3%, transparent 3% 9%), linear-gradient(#8e2f3e 0 66%, #a9825a 66%); }
 .bg-night { background: linear-gradient(#39405e 0 70%, #6b5a45 70%); }
 .bg-nightout { background: linear-gradient(#1d2848 0 60%, #3e5b3a 60%); }
 

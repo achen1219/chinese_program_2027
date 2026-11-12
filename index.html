@@ -236,6 +236,7 @@ details.week.now { background: var(--accent-soft); border-radius: 8px; padding-i
 .bg-sunset { background: linear-gradient(#f7b27a 0 22%, #ef8f6d 42%, #3d7fa8 42% 56%, #e6c78c 56%); }
 .bg-dawn { background: linear-gradient(#ffd7a6 0 28%, #c3e2f2 60%, #8cc56f 60%); }
 .bg-track { background: repeating-linear-gradient(0deg, #c4553f 0 9%, #e9e2dc 9% 10%), linear-gradient(#bfe3f5 0 48%, #8cc56f 48%); background-size: 100% 42%, 100% 100%; background-position: bottom, top; background-repeat: no-repeat; }
+.bg-stage { background: repeating-linear-gradient(90deg, rgba(0,0,0,.14) 0 3%, transparent 3% 9%), linear-gradient(#8e2f3e 0 66%, #a9825a 66%); }
 .bg-night { background: linear-gradient(#39405e 0 70%, #6b5a45 70%); }
 .bg-nightout { background: linear-gradient(#1d2848 0 60%, #3e5b3a 60%); }
 
@@ -1315,6 +1316,1017 @@ APZH.resources = [
     ['萌典', 'https://www.moedict.tw/', '快速查字，附注音']
   ]}
 ];
+
+// Batch 2 (Nov 2026): 20 more listening sets, L11–L30. Four per task type, interleaved so the
+// daily commute list rotates through the types. Same format as data_listening.js.
+APZH.listening.push(
+{
+  id: 'L11', type: 'instr', unit: 5, title: '游泳池使用須知',
+  intro: 'You will listen to an announcement at a public swimming pool.',
+  speakers: { N: { name: '廣播', g: 'f' } },
+  lines: [
+    ['N', '各位泳客您好，歡迎來到市立游泳池。為了大家的安全，請注意以下幾件事。'],
+    ['N', '第一，下水以前，請先到淋浴間沖洗身體，並且戴上泳帽。沒有戴泳帽的泳客不能進入泳池。'],
+    ['N', '第二，泳池旁邊的地板很滑，請慢慢走，不要奔跑。'],
+    ['N', '第三，深水區的水深是兩公尺，身高不到一百四十公分的兒童，必須有家長陪同才能進入。'],
+    ['N', '另外，今天下午三點到四點，第一和第二水道有游泳課，請一般泳客使用其他水道。'],
+    ['N', '如果身體不舒服，請馬上告訴穿紅色上衣的救生員。祝您游得愉快！']
+  ],
+  questions: [
+    { q: 'What is the main purpose of the announcement?', o: ['To explain the safety rules of a swimming pool', 'To advertise swimming lessons', 'To announce that the pool is closing for cleaning', 'To introduce the lifeguards'], a: 0 },
+    { q: 'What must swimmers do before entering the water?', o: ['Show a membership card', 'Shower and put on a swim cap', 'Warm up for ten minutes', 'Sign a form at the front desk'], a: 1 },
+    { q: 'Who must be accompanied by a parent in the deep end?', o: ['Children under fourteen years old', 'Anyone who cannot swim two hundred meters', 'Children shorter than 140 centimeters', 'Children who are taking a swimming class'], a: 2 },
+    { q: 'Why should general swimmers avoid lanes 1 and 2 from three to four o’clock?', o: ['The lanes are being cleaned', 'A swimming class is using them', 'A competition is being held', 'The water there is too deep'], a: 1 },
+    { q: 'How can swimmers recognize a lifeguard?', o: ['By a yellow cap', 'By a whistle', 'By a blue uniform', 'By a red shirt'], a: 3 }
+  ]
+},
+{
+  id: 'L12', type: 'conv', unit: 5, title: '週末去爬山',
+  intro: 'You will listen to a conversation between two friends, Wenjie and Yating.',
+  speakers: { A: { name: '文傑', g: 'm' }, B: { name: '雅婷', g: 'f' } },
+  lines: [
+    ['A', '雅婷，這個星期六你想不想一起去爬象山？聽說山上可以看到整個臺北市。'],
+    ['B', '好啊！可是我看了天氣預報，星期六下午可能會下雨。'],
+    ['A', '真的嗎？那我們早一點出發吧。早上七點在捷運站見面，怎麼樣？'],
+    ['B', '七點太早了吧！我星期五晚上要練鋼琴練到很晚。八點可以嗎？'],
+    ['A', '好，就八點。爬完山大概十點，我們可以去附近吃小籠包。'],
+    ['B', '太棒了！對了，要不要約志明一起去？'],
+    ['A', '我問過他了，他星期六要去看牙醫，不能來。'],
+    ['B', '真可惜。那我多帶一些水和水果，你記得帶相機喔。'],
+    ['A', '沒問題，星期六見！']
+  ],
+  questions: [
+    { q: 'What do the speakers plan to do on Saturday?', o: ['Watch a movie', 'Hike up a mountain', 'Practice the piano together', 'Go shopping downtown'], a: 1 },
+    { q: 'Why do they decide to go in the morning?', o: ['It may rain in the afternoon', 'The mountain closes at noon', 'The metro is less crowded', 'Wenjie has a class in the afternoon'], a: 0 },
+    { q: 'Why does Yating not want to meet at seven o’clock?', o: ['She lives far from the station', 'She has to see a dentist', 'She will be practicing the piano late the night before', 'She wants to eat breakfast first'], a: 2 },
+    { q: 'Why can’t Zhiming join them?', o: ['He is afraid of heights', 'He has a dentist appointment', 'He has a piano lesson', 'He does not like hiking'], a: 1 },
+    { q: 'What will Wenjie bring?', o: ['Water', 'Fruit', 'Dumplings', 'A camera'], a: 3 }
+  ]
+},
+{
+  id: 'L13', type: 'report', unit: 6, title: '小長頸鹿和大家見面',
+  intro: 'You will listen to a news report.',
+  speakers: { N: { name: '主播', g: 'm' } },
+  lines: [
+    ['N', '市立動物園今天上午宣布，上個月出生的小長頸鹿，將在下星期六第一次和遊客見面。'],
+    ['N', '這隻小長頸鹿是女生，出生的時候身高已經有一百八十公分，體重六十公斤。'],
+    ['N', '動物園園長表示，小長頸鹿很健康，每天都跟著媽媽學習吃樹葉。'],
+    ['N', '為了替牠取名字，動物園從今天起舉辦網路投票，民眾可以從「安安」、「樂樂」和「高高」三個名字當中，選出最喜歡的一個。投票到這個月底截止。'],
+    ['N', '動物園也提醒遊客，參觀的時候請保持安靜，拍照不要使用閃光燈，以免嚇到小長頸鹿。']
+  ],
+  questions: [
+    { q: 'What is the report mainly about?', o: ['A zoo that is opening next month', 'A baby giraffe that will soon meet visitors', 'A giraffe that escaped from a zoo', 'A photo contest at the zoo'], a: 1 },
+    { q: 'When can visitors first see the baby giraffe?', o: ['Today', 'Next Saturday', 'At the end of the month', 'Next month'], a: 1 },
+    { q: 'What does the zoo director say about the baby giraffe?', o: ['It is healthy and learning to eat leaves', 'It is smaller than expected', 'It has been separated from its mother', 'It is afraid of visitors'], a: 0 },
+    { q: 'How will the giraffe’s name be decided?', o: ['The director will choose it', 'Schoolchildren will send in drawings', 'The public will vote online among three names', 'The first visitor will pick it'], a: 2 },
+    { q: 'What are visitors asked to do?', o: ['Arrive early in the morning', 'Buy tickets online', 'Bring leaves for the giraffe', 'Stay quiet and not use a flash'], a: 3 }
+  ]
+},
+{
+  id: 'L14', type: 'pres', unit: 2, title: '珍珠奶茶',
+  intro: 'You will listen to a student’s presentation.',
+  speakers: { N: { name: '學生', g: 'f' } },
+  lines: [
+    ['N', '大家好，今天我要介紹一種從臺灣紅到全世界的飲料，那就是珍珠奶茶。'],
+    ['N', '珍珠奶茶大約在一九八〇年代出現。那時候，臺灣的茶店開始賣冰的奶茶，後來有人把一種叫做「粉圓」的傳統甜點加進奶茶裡，沒想到大受歡迎。'],
+    ['N', '粉圓是用樹薯粉做的，煮熟以後又圓又有彈性，看起來像黑色的珍珠，所以叫做「珍珠」。'],
+    ['N', '喝珍珠奶茶要用比較粗的吸管，一邊喝茶，一邊吃珍珠。客人還可以自己決定要多甜、要多少冰塊。'],
+    ['N', '現在，在紐約、東京、倫敦都買得到珍珠奶茶。對很多住在國外的臺灣人來說，喝一杯珍珠奶茶，就好像回到了家鄉。'],
+    ['N', '我覺得珍珠奶茶受歡迎，是因為它把傳統的甜點和現代的飲料結合在一起，又能讓每個人選擇自己喜歡的口味。謝謝大家。']
+  ],
+  questions: [
+    { q: 'What is the presentation mainly about?', o: ['How to open a tea shop', 'The origin and popularity of bubble tea', 'The health effects of sweet drinks', 'Traditional desserts in Taiwan'], a: 1 },
+    { q: 'According to the speaker, how was bubble tea created?', o: ['A traditional dessert was added to iced milk tea', 'A tea shop copied a drink from Japan', 'A farmer invented a new kind of tea leaf', 'A student mixed tea with fruit juice'], a: 0 },
+    { q: 'What can customers decide when they order?', o: ['The size of the pearls', 'The color of the straw', 'How sweet the drink is and how much ice it has', 'Which kind of milk is used'], a: 2 },
+    { q: 'What does bubble tea mean to many Taiwanese people living abroad?', o: ['It is too expensive to drink often', 'It tastes different from the original', 'It is a way to make new friends', 'It reminds them of home'], a: 3 },
+    { q: 'Why does the speaker think bubble tea is popular?', o: ['It is cheaper than coffee', 'It combines tradition with a modern drink and lets people choose', 'It is advertised by famous singers', 'It is healthier than other drinks'], a: 1 }
+  ]
+},
+{
+  id: 'L15', type: 'chart', unit: 4, title: '國中生怎麼用手機',
+  intro: 'You will listen to a report and look at a chart.',
+  speakers: { N: { name: '記者', g: 'f' } },
+  chart: { title: '國中生每天用手機做各種事的平均時間', unit: '分鐘', max: 70,
+    items: [ ['看影片', 62], ['玩遊戲', 45], ['社群和聊天', 38], ['查資料、寫作業', 25], ['聽音樂', 20] ] },
+  lines: [
+    ['N', '一項針對兩千名國中生的調查發現，學生平均每天使用手機三個多小時。'],
+    ['N', '從圖表可以看到，花最多時間的活動是看影片，平均每天六十二分鐘；其次是玩遊戲，四十五分鐘。'],
+    ['N', '用手機查資料和寫作業的時間只有二十五分鐘，還不到看影片時間的一半。'],
+    ['N', '負責這項調查的教授表示，手機本身沒有好壞，重要的是怎麼使用。他建議家長不要完全禁止孩子用手機，而是和孩子一起訂出使用的時間和規則。'],
+    ['N', '調查也發現，有訂規則的家庭，孩子的睡眠時間平均多了四十分鐘。']
+  ],
+  questions: [
+    { q: 'What is the report mainly about?', o: ['How middle school students use their phones', 'Which phone brands students prefer', 'Why schools ban phones in class', 'How to choose a phone for a child'], a: 0 },
+    { q: 'According to the chart, which activity takes the second most time?', o: ['Watching videos', 'Playing games', 'Social media and chatting', 'Listening to music'], a: 1 },
+    { q: 'According to the chart, about how many minutes a day do students spend looking up information and doing homework on their phones?', o: ['20', '25', '38', '45'], a: 1 },
+    { q: 'What does the professor suggest parents do?', o: ['Ban phones completely', 'Check their children’s phones every night', 'Set times and rules together with their children', 'Buy phones only for high school students'], a: 2 },
+    { q: 'What did the survey find about families that set rules?', o: ['Their children got better grades', 'Their children spent more time on homework', 'Their children used phones only on weekends', 'Their children slept about forty minutes longer'], a: 3 }
+  ]
+},
+{
+  id: 'L16', type: 'instr', unit: 1, title: '社區大掃除',
+  intro: 'You will listen to an announcement in a neighborhood.',
+  speakers: { N: { name: '里長', g: 'm' } },
+  lines: [
+    ['N', '各位鄰居大家好，我是里長。這個星期天是我們社區一年一次的大掃除，請大家一起來幫忙。'],
+    ['N', '當天早上八點半，請到社區公園的涼亭集合。我們會分成三組：第一組打掃公園，第二組清理巷子裡的落葉，第三組幫獨居的長輩擦窗戶。'],
+    ['N', '掃把和垃圾袋由里辦公室準備，請大家自己帶手套、帽子和水壺。'],
+    ['N', '打掃大約在十一點半結束。結束以後，里辦公室會請大家吃便當和綠豆湯。'],
+    ['N', '如果當天下雨，活動就延到下個星期天。想參加的鄰居，請在星期五以前到里辦公室登記，謝謝大家！']
+  ],
+  questions: [
+    { q: 'Who is the speaker?', o: ['A school principal', 'A park gardener', 'A neighborhood leader', 'A restaurant owner'], a: 2 },
+    { q: 'What will the third group do?', o: ['Sweep the park', 'Clean windows for elderly people who live alone', 'Clear fallen leaves from the lanes', 'Prepare lunch for the volunteers'], a: 1 },
+    { q: 'What should participants bring?', o: ['Gloves, a hat and a water bottle', 'Brooms and trash bags', 'A boxed lunch', 'Rain boots and an umbrella'], a: 0 },
+    { q: 'What will happen after the cleanup?', o: ['A meeting about next year’s plan', 'A prize drawing', 'A free meal for the participants', 'A visit to the elderly'], a: 2 },
+    { q: 'What will happen if it rains on Sunday?', o: ['The cleanup will move indoors', 'The cleanup will be canceled', 'The cleanup will start in the afternoon', 'The cleanup will be held the following Sunday'], a: 3 }
+  ]
+},
+{
+  id: 'L17', type: 'conv', unit: 1, title: '我可以養狗嗎？',
+  intro: 'You will listen to a conversation between a boy, Xiaoyu, and his mother.',
+  speakers: { A: { name: '小宇', g: 'm' }, B: { name: '媽媽', g: 'f' } },
+  lines: [
+    ['A', '媽，我們班同學家裡有一隻小狗要送人，我可以養嗎？'],
+    ['B', '養狗可不是一件簡單的事。每天要餵牠、帶牠散步，還要幫牠洗澡。'],
+    ['A', '我知道！我已經想好了，我每天早上六點半起床帶牠去散步，放學以後再餵牠。'],
+    ['B', '你現在七點都起不來，六點半真的可以嗎？'],
+    ['A', '為了小狗，我一定可以！而且我可以用我的零用錢買狗食。'],
+    ['B', '還有，暑假我們要回臺灣看外婆，到時候小狗怎麼辦？'],
+    ['A', '這個我沒想到。也許可以請隔壁的王阿姨幫忙照顧？'],
+    ['B', '這樣吧，你先連續兩個星期每天早起、自己整理房間。如果做得到，我們再去問王阿姨，然後一起去看小狗。'],
+    ['A', '太好了！我明天就開始！']
+  ],
+  questions: [
+    { q: 'What does Xiaoyu want?', o: ['To visit his grandmother in Taiwan', 'To adopt a classmate’s puppy', 'To get a bigger allowance', 'To walk the neighbor’s dog'], a: 1 },
+    { q: 'What is the mother’s main concern at first?', o: ['Dogs are expensive to buy', 'The apartment is too small', 'Taking care of a dog is a lot of work', 'Xiaoyu is allergic to dogs'], a: 2 },
+    { q: 'How does Xiaoyu plan to pay for the dog’s food?', o: ['With his allowance', 'By working for Auntie Wang', 'By asking his grandmother', 'By selling his old toys'], a: 0 },
+    { q: 'What problem had Xiaoyu not thought about?', o: ['Where the dog would sleep', 'How to train the dog', 'What the dog would eat', 'Who would look after the dog during their summer trip'], a: 3 },
+    { q: 'What does the mother decide?', o: ['Xiaoyu cannot have a dog', 'Xiaoyu must first show for two weeks that he can be responsible', 'They will get the dog tomorrow', 'Auntie Wang will keep the dog'], a: 1 }
+  ]
+},
+{
+  id: 'L18', type: 'report', unit: 3, title: '美術館晚上也開放',
+  intro: 'You will listen to a news report.',
+  speakers: { N: { name: '主播', g: 'f' } },
+  lines: [
+    ['N', '市立美術館宣布，從下個月開始，每個星期五和星期六的開放時間將延長到晚上九點。'],
+    ['N', '館長表示，很多上班族和學生白天沒有時間看展覽。延長開放時間，是希望讓更多人有機會走進美術館。'],
+    ['N', '為了吸引年輕人，美術館還會在星期五晚上舉辦免費的音樂會，並且邀請藝術家到現場介紹自己的作品。'],
+    ['N', '另外，十八歲以下的學生只要出示學生證，就可以免費入場。一般民眾的門票仍然是一百元。'],
+    ['N', '目前正在展出的是「水墨與城市」特展，展出五十多位年輕畫家的作品，展期到十二月底。']
+  ],
+  questions: [
+    { q: 'What is the main announcement?', o: ['The museum will stay open later on Fridays and Saturdays', 'The museum will close for repairs', 'The museum will raise its ticket price', 'The museum will move to a new building'], a: 0 },
+    { q: 'Why is the museum making this change?', o: ['To earn more money from tickets', 'Because many people cannot visit during the day', 'Because the daytime is too crowded', 'To prepare for a new exhibition'], a: 1 },
+    { q: 'What will happen on Friday evenings?', o: ['Painting classes for children', 'Guided tours in English', 'Free concerts and talks by artists', 'Movie screenings'], a: 2 },
+    { q: 'Who can enter for free?', o: ['Everyone on Friday evenings', 'Office workers after six o’clock', 'Artists who live in the city', 'Students under eighteen with a student ID'], a: 3 },
+    { q: 'What is true about the special exhibition?', o: ['It will open next month', 'It shows works by more than fifty young painters', 'It requires a separate ticket', 'It is about traditional music'], a: 1 }
+  ]
+},
+{
+  id: 'L19', type: 'pres', unit: 1, title: '外公的雜貨店',
+  intro: 'You will listen to a student’s presentation.',
+  speakers: { N: { name: '學生', g: 'm' } },
+  lines: [
+    ['N', '大家好，今天我想介紹我外公在臺南開的雜貨店。'],
+    ['N', '這家店已經開了四十多年，賣米、醬油、糖果，也賣文具。店面不大，可是東西很多。'],
+    ['N', '小時候，我最喜歡站在櫃檯後面幫外公算錢。外公不用計算機，他用的是算盤，算得又快又準。'],
+    ['N', '附近的鄰居不只來買東西，也常常坐在店門口聊天。誰家的孩子考上大學，誰家要辦喜事，外公都知道。有的客人忘了帶錢，外公就說：「沒關係，下次再給。」'],
+    ['N', '這幾年，附近開了兩家便利商店，雜貨店的生意沒有以前好了。舅舅勸外公把店關了，好好休息，可是外公不肯。'],
+    ['N', '他說：「這家店不只是做生意的地方，也是鄰居們見面的地方。」我覺得，外公的雜貨店賣的不只是商品，還有人和人之間的感情。謝謝大家。']
+  ],
+  questions: [
+    { q: 'What is the presentation mainly about?', o: ['How to run a successful business', 'A grandfather’s store and what it means to the neighborhood', 'Why convenience stores are popular', 'The history of the abacus'], a: 1 },
+    { q: 'What did the speaker enjoy doing as a child?', o: ['Helping count money at the counter', 'Eating candy from the shelves', 'Delivering rice to neighbors', 'Chatting with customers outside'], a: 0 },
+    { q: 'What does the grandfather do when a customer forgets to bring money?', o: ['He asks them to come back later to buy', 'He writes their name on the wall', 'He lets them pay next time', 'He gives them the goods for free'], a: 2 },
+    { q: 'Why is business not as good as before?', o: ['The grandfather raised his prices', 'Many neighbors moved away', 'The store sells fewer kinds of goods', 'Two convenience stores opened nearby'], a: 3 },
+    { q: 'Why does the grandfather refuse to close the store?', o: ['He needs the income', 'He sees it as a place where neighbors meet', 'He wants his grandson to take it over', 'He has nowhere else to live'], a: 1 }
+  ]
+},
+{
+  id: 'L20', type: 'chart', unit: 1, title: '全家一起吃晚餐',
+  intro: 'You will listen to part of a radio program and look at a chart.',
+  speakers: { N: { name: '主持人', g: 'm' } },
+  chart: { title: '學生每週和家人一起吃晚餐的次數', unit: '%', max: 40,
+    items: [ ['每天', 28], ['四到六次', 34], ['一到三次', 27], ['幾乎沒有', 11] ] },
+  lines: [
+    ['N', '你多久和家人一起吃一次晚餐呢？一個兒童福利團體最近訪問了一千五百名中小學生。'],
+    ['N', '結果發現，每天都和家人一起吃晚餐的學生不到三成。最多的是每個星期一起吃四到六次，佔百分之三十四。'],
+    ['N', '值得注意的是，有百分之十一的學生幾乎沒有和家人一起吃晚餐。主要的原因是父母工作太晚，或是學生自己要補習。'],
+    ['N', '研究人員指出，常常和家人一起吃飯的孩子，比較願意跟父母分享學校的事，心情也比較好。'],
+    ['N', '專家建議，就算平日很忙，也可以把星期天訂為「家庭晚餐日」，全家人一起做飯、吃飯，而且吃飯的時候不看手機。']
+  ],
+  questions: [
+    { q: 'What does the survey look at?', o: ['What students eat for dinner', 'How often students eat dinner with their families', 'How much families spend on food', 'Who cooks dinner at home'], a: 1 },
+    { q: 'According to the chart, which group is the largest?', o: ['Students who eat with their families every day', 'Students who eat with their families four to six times a week', 'Students who eat with their families one to three times a week', 'Students who almost never eat with their families'], a: 1 },
+    { q: 'According to the chart, what percentage of students eat dinner with their families every day?', o: ['11%', '27%', '28%', '34%'], a: 2 },
+    { q: 'Why do some students almost never eat dinner with their families?', o: ['Their parents work late or the students have cram school', 'They prefer to eat with friends', 'Their families eat out too often', 'They do not like home cooking'], a: 0 },
+    { q: 'What do the experts suggest?', o: ['Eating dinner earlier in the evening', 'Letting children choose the menu', 'Eating at restaurants on weekends', 'Making Sunday a family dinner day without phones'], a: 3 }
+  ]
+},
+{
+  id: 'L21', type: 'instr', unit: 6, title: '機場廣播',
+  intro: 'You will listen to an announcement at an airport.',
+  speakers: { N: { name: '廣播', g: 'f' } },
+  lines: [
+    ['N', '各位旅客請注意。搭乘長風航空三一六號班機前往東京的旅客，因為天氣的關係，本班機將延後四十分鐘起飛，新的起飛時間是下午三點二十分。'],
+    ['N', '另外，登機門由原來的五號改為九號。'],
+    ['N', '請各位旅客在兩點五十分以前，到九號登機門等候。'],
+    ['N', '登機的時候，請準備好護照和登機證。帶小孩的旅客和需要協助的旅客可以優先登機。'],
+    ['N', '候機室旁邊有免費的飲水機和充電站，歡迎多加利用。造成您的不便，我們非常抱歉。']
+  ],
+  questions: [
+    { q: 'Why is the flight delayed?', o: ['A mechanical problem', 'The weather', 'A late crew', 'Heavy air traffic'], a: 1 },
+    { q: 'What is the new departure time?', o: ['2:40 p.m.', '2:50 p.m.', '3:20 p.m.', '4:00 p.m.'], a: 2 },
+    { q: 'What else has changed?', o: ['The boarding gate', 'The destination', 'The flight number', 'The airline'], a: 0 },
+    { q: 'Who may board first?', o: ['Passengers in the front rows', 'Passengers with only carry-on bags', 'Passengers who arrived earliest', 'Passengers with children or who need assistance'], a: 3 },
+    { q: 'What is available near the waiting area?', o: ['Free snacks', 'Free drinking water and charging stations', 'A children’s play area', 'A currency exchange counter'], a: 1 }
+  ]
+},
+{
+  id: 'L22', type: 'conv', unit: 2, title: '準備演講比賽',
+  intro: 'You will listen to a conversation between a student, Xiaoan, and her teacher, Mr. Chen.',
+  speakers: { A: { name: '小安', g: 'f' }, B: { name: '陳老師', g: 'm' } },
+  lines: [
+    ['B', '小安，下個月的中文演講比賽，你想好題目了嗎？'],
+    ['A', '老師，我想講「我的奶奶」，可是我怕內容太普通。'],
+    ['B', '題目普通沒關係，重要的是有沒有特別的故事。你的奶奶有什麼讓你印象深刻的事？'],
+    ['A', '她七十歲才開始學用電腦，現在每天寫部落格，介紹客家菜的做法。'],
+    ['B', '這個故事很好啊！你可以從這裡談「活到老，學到老」。'],
+    ['A', '對耶！我還可以帶一張奶奶做菜的照片。可是我一上台就緊張，常常忘詞。'],
+    ['B', '你可以把重點寫在小卡片上，每天對著鏡子練習一次。比賽前一個星期，再講給同學聽。'],
+    ['A', '好，我今天回家就開始寫稿子。演講有時間限制嗎？'],
+    ['B', '三到四分鐘。太短或太長都會扣分，所以練習的時候要計時。']
+  ],
+  questions: [
+    { q: 'What are the speakers discussing?', o: ['A writing assignment', 'Preparing for a Chinese speech contest', 'A cooking class', 'Starting a blog'], a: 1 },
+    { q: 'Why is Xiaoan worried about her topic?', o: ['She thinks it is too ordinary', 'She thinks it is too difficult', 'Another student chose the same topic', 'She does not know her grandmother well'], a: 0 },
+    { q: 'What is special about Xiaoan’s grandmother?', o: ['She opened a Hakka restaurant', 'She won a speech contest', 'She learned to use a computer at seventy and now writes a blog', 'She teaches cooking at a school'], a: 2 },
+    { q: 'What does the teacher suggest for Xiaoan’s nervousness?', o: ['Reading the whole script on stage', 'Choosing a shorter topic', 'Watching videos of past winners', 'Writing key points on cards and practicing in front of a mirror'], a: 3 },
+    { q: 'What does the teacher say about the length of the speech?', o: ['It can be any length', 'It should be three to four minutes, or points will be taken off', 'It must be at least five minutes', 'It will not be timed'], a: 1 }
+  ]
+},
+{
+  id: 'L23', type: 'report', unit: 4, title: '學生設計的無人機',
+  intro: 'You will listen to a news report.',
+  speakers: { N: { name: '主播', g: 'm' } },
+  lines: [
+    ['N', '住在山區的居民，以後拿藥可能會更方便了。'],
+    ['N', '東部一所高中的五位學生，設計了一架可以運送藥品的無人機。這架無人機一次可以載兩公斤的東西，飛行二十公里。'],
+    ['N', '指導老師說，山上的部落離醫院很遠，開車來回要三個小時。如果用無人機，只要二十分鐘就能把藥送到。'],
+    ['N', '學生們花了一年的時間，失敗了十幾次。有一次，無人機還因為風太大，掉進了河裡。'],
+    ['N', '他們的作品上個月得到了全國科學展覽的第一名。學生們表示，希望將來能和醫院合作，讓這架無人機真正幫助山區的居民。']
+  ],
+  questions: [
+    { q: 'What is the report mainly about?', o: ['A new hospital in the mountains', 'Students who designed a drone to deliver medicine', 'A science fair for high school students', 'A drone race in eastern Taiwan'], a: 1 },
+    { q: 'How much can the drone carry at one time?', o: ['2 kilograms', '3 kilograms', '12 kilograms', '20 kilograms'], a: 0 },
+    { q: 'Why would the drone be useful?', o: ['It is cheaper than a car', 'It can carry patients to the hospital', 'Mountain villages are far from the hospital, and it is much faster', 'It can fly in any weather'], a: 2 },
+    { q: 'What difficulty did the students face?', o: ['They had no teacher to guide them', 'They ran out of money', 'The hospital refused to help', 'They failed many times, and once the drone fell into a river'], a: 3 },
+    { q: 'What do the students hope to do next?', o: ['Sell the drone to a company', 'Work with hospitals so the drone can really be used', 'Enter an international competition', 'Build a bigger drone for passengers'], a: 1 }
+  ]
+},
+{
+  id: 'L24', type: 'pres', unit: 3, title: '古箏',
+  intro: 'You will listen to a student’s presentation.',
+  speakers: { N: { name: '學生', g: 'f' } },
+  lines: [
+    ['N', '大家好，今天我要介紹一種中國傳統樂器，叫做古箏。'],
+    ['N', '古箏已經有兩千多年的歷史了。現在最常見的古箏有二十一條弦。演奏的人右手戴著假指甲撥弦，左手按弦，改變聲音的高低。'],
+    ['N', '古箏的聲音很像流水，所以很多有名的曲子都跟大自然有關，比方說《高山流水》。'],
+    ['N', '我從八歲開始學古箏。剛開始的時候，手指常常痛得想哭，可是老師告訴我：「慢慢來，比較快。」'],
+    ['N', '去年，我在學校的國際日表演。很多同學第一次聽到古箏，都跑來問我這是什麼樂器。有一位同學還說，聽起來像下雨的聲音。'],
+    ['N', '現在也有人用古箏演奏流行歌曲和電影音樂。我覺得，傳統樂器只要加上新的想法，一樣可以讓年輕人喜歡。謝謝大家。']
+  ],
+  questions: [
+    { q: 'What is the presentation mainly about?', o: ['A traditional instrument and the speaker’s experience with it', 'How to buy a musical instrument', 'A famous Chinese musician', 'The history of film music'], a: 0 },
+    { q: 'How is the guzheng played?', o: ['Both hands press the strings', 'The right hand plucks the strings and the left hand presses them', 'The player blows into it', 'The player uses a bow'], a: 1 },
+    { q: 'Why are many famous guzheng pieces about nature?', o: ['They were written in the mountains', 'Nature is the easiest subject to play', 'The instrument’s sound resembles flowing water', 'The instrument is made from a rare tree'], a: 2 },
+    { q: 'What did the teacher most likely mean by 「慢慢來，比較快」?', o: ['The speaker should play slower music', 'The speaker was learning too slowly', 'The speaker should practice less often', 'Being patient leads to faster progress in the end'], a: 3 },
+    { q: 'What is the speaker’s view of traditional instruments?', o: ['They should only play traditional music', 'With new ideas they can appeal to young people', 'They are too difficult for children', 'They are disappearing quickly'], a: 1 }
+  ]
+},
+{
+  id: 'L25', type: 'chart', unit: 5, title: '放學以後做什麼',
+  intro: 'You will listen to a report and look at a chart.',
+  speakers: { N: { name: '記者', g: 'm' } },
+  chart: { title: '國中生平常參加的課後活動（可以選不只一項）', unit: '%', max: 60,
+    items: [ ['補習', 58], ['運動', 41], ['音樂或美術', 27], ['志工服務', 9], ['沒有參加', 14] ] },
+  lines: [
+    ['N', '放學以後，國中生都在做什麼？一項調查請一千名國中生選出自己平常參加的課後活動，可以選不只一項。'],
+    ['N', '結果顯示，將近六成的學生放學後要補習；有四成左右的學生參加運動；學音樂或美術的不到三成。'],
+    ['N', '參加志工服務的學生最少，只有百分之九。'],
+    ['N', '有學生表示，很想參加球隊，可是補習以後已經沒有時間了。'],
+    ['N', '教育專家提醒，課後活動不是越多越好。學生應該留一些時間休息，做自己真正有興趣的事。']
+  ],
+  questions: [
+    { q: 'What does the chart show?', o: ['How many hours students study each day', 'The after-school activities middle school students take part in', 'The cost of after-school classes', 'The most popular sports among students'], a: 1 },
+    { q: 'According to the chart, which activity do the fewest students take part in?', o: ['Cram school', 'Sports', 'Music or art', 'Volunteer service'], a: 3 },
+    { q: 'According to the chart, what percentage of students take part in sports?', o: ['9%', '27%', '41%', '58%'], a: 2 },
+    { q: 'What problem does one student mention?', o: ['There is no time for a sports team after cram school', 'Cram school is too expensive', 'The school has no sports teams', 'Parents do not allow sports'], a: 0 },
+    { q: 'What does the education expert advise?', o: ['Joining as many activities as possible', 'Choosing activities that help with exams', 'Leaving time to rest and to do what truly interests them', 'Stopping cram school altogether'], a: 2 }
+  ]
+},
+{
+  id: 'L26', type: 'instr', unit: 4, title: '在網站上交作業',
+  intro: 'You will listen to a teacher giving instructions to a class.',
+  speakers: { N: { name: '老師', g: 'f' } },
+  lines: [
+    ['N', '同學們，從這個星期開始，中文課的作業都要在學校的學習網站上繳交。現在老師說明一下步驟。'],
+    ['N', '第一步，用你的學號和密碼登入學習網站，然後點選「中文課」。'],
+    ['N', '第二步，在「本週作業」裡找到作文題目。寫好以後，按「上傳」，把你的檔案傳上去。'],
+    ['N', '上傳成功以後，畫面上會出現一個綠色的勾。如果沒有看到，就表示沒有成功，要再傳一次。'],
+    ['N', '請注意，繳交期限是星期五晚上九點。過了時間，網站就不能上傳了。'],
+    ['N', '如果家裡沒有電腦或網路，可以在星期三和星期四放學後，到學校的電腦教室寫。有問題的同學，下課來找老師。']
+  ],
+  questions: [
+    { q: 'What is the purpose of the teacher’s talk?', o: ['To explain how to hand in homework online', 'To announce a computer class', 'To assign a new essay topic', 'To warn students about late homework'], a: 0 },
+    { q: 'What is the first step?', o: ['Find this week’s essay topic', 'Log in with a student number and password', 'Upload the file', 'Go to the computer lab'], a: 1 },
+    { q: 'How do students know the upload was successful?', o: ['They receive an email', 'The teacher tells them in class', 'A green check mark appears on the screen', 'The website closes by itself'], a: 2 },
+    { q: 'When is the homework due?', o: ['Wednesday after school', 'Thursday after school', 'Friday morning', 'Friday at nine in the evening'], a: 3 },
+    { q: 'What can students without a computer at home do?', o: ['Hand in the homework on paper', 'Use the school computer lab after school on Wednesday and Thursday', 'Ask the teacher for more time', 'Borrow a computer from the library'], a: 1 }
+  ]
+},
+{
+  id: 'L27', type: 'conv', unit: 6, title: '暑假去環島',
+  intro: 'You will listen to a conversation between two classmates, Meiling and Daming.',
+  speakers: { A: { name: '美玲', g: 'f' }, B: { name: '大明', g: 'm' } },
+  lines: [
+    ['A', '大明，暑假你們家要去哪裡玩？'],
+    ['B', '我們打算去臺灣環島，從臺北出發，先到花蓮，再到臺東和高雄。'],
+    ['A', '聽起來好棒！你們要自己開車嗎？'],
+    ['B', '本來想租車，可是爸爸說暑假路上車太多，後來決定坐火車。東部的火車沿著海邊走，風景特別美。'],
+    ['A', '那你們要玩幾天？'],
+    ['B', '一共十天。我最期待的是在臺東坐熱氣球，可是妹妹怕高，她只想去夜市吃東西。'],
+    ['A', '哈哈，那你們怎麼辦？'],
+    ['B', '媽媽說，早上去看熱氣球，晚上去逛夜市，這樣兩個人都高興。'],
+    ['A', '你媽媽真聰明。記得多拍一些照片給我看！']
+  ],
+  questions: [
+    { q: 'What is the conversation mainly about?', o: ['A school trip to Hualien', 'Daming’s family trip around Taiwan', 'Meiling’s summer job', 'How to buy train tickets'], a: 1 },
+    { q: 'How will Daming’s family travel?', o: ['By rental car', 'By plane', 'By train', 'By tour bus'], a: 2 },
+    { q: 'Why did the family decide not to rent a car?', o: ['There is too much traffic in the summer', 'Renting a car is too expensive', 'The father does not like driving', 'The roads in the east are dangerous'], a: 0 },
+    { q: 'What is Daming looking forward to most?', o: ['Eating at night markets', 'Swimming at the beach', 'Taking photos of the coast', 'Riding in a hot air balloon'], a: 3 },
+    { q: 'How does the mother solve the disagreement between Daming and his sister?', o: ['She lets the sister stay at the hotel', 'She plans balloons in the morning and the night market in the evening', 'She cancels the balloon ride', 'She lets the father decide'], a: 1 }
+  ]
+},
+{
+  id: 'L28', type: 'report', unit: 5, title: '城市馬拉松',
+  intro: 'You will listen to a news report.',
+  speakers: { N: { name: '主播', g: 'f' } },
+  lines: [
+    ['N', '一年一度的城市馬拉松，將在這個星期天早上六點起跑。今年一共有兩萬多人報名，比去年多了三千人。'],
+    ['N', '比賽的路線會經過市政府、河濱公園和大學城。星期天早上五點到中午十二點，這些路段將實施交通管制，車輛不能通行。'],
+    ['N', '警察局提醒，當天早上要出門的民眾，最好改搭捷運。捷運也會提早到五點開始營運。'],
+    ['N', '今年的比賽還有一個特別的地方：主辦單位不再提供紙杯，請跑者自己帶環保杯，希望能減少垃圾。'],
+    ['N', '年紀最大的參賽者是八十二歲的林爺爺。他說，他不在乎跑第幾名，只要能跑完全程就很開心。']
+  ],
+  questions: [
+    { q: 'What is the report mainly about?', o: ['The results of a marathon', 'The upcoming city marathon and the arrangements for it', 'A new metro line', 'How to train for a marathon'], a: 1 },
+    { q: 'How does this year’s number of runners compare with last year’s?', o: ['It is three thousand higher', 'It is about the same', 'It is twenty thousand higher', 'It is lower because of the weather'], a: 0 },
+    { q: 'What are residents advised to do on Sunday morning?', o: ['Stay home until noon', 'Drive along the river instead', 'Take the metro instead of driving', 'Leave home before five o’clock'], a: 2 },
+    { q: 'What is new about this year’s race?', o: ['The race starts at night', 'The route passes the university', 'Runners over eighty may take part', 'No paper cups are provided; runners bring their own cups'], a: 3 },
+    { q: 'What is Grandpa Lin’s attitude toward the race?', o: ['He hopes to win his age group', 'He only cares about finishing', 'He worries about the traffic', 'He thinks he is too old to run'], a: 1 }
+  ]
+},
+{
+  id: 'L29', type: 'pres', unit: 6, title: '會唱歌的垃圾車',
+  intro: 'You will listen to a student’s presentation.',
+  speakers: { N: { name: '學生', g: 'm' } },
+  lines: [
+    ['N', '大家好。如果你在臺灣聽到〈給愛麗絲〉這首鋼琴曲，別以為是賣冰淇淋的車來了，那其實是垃圾車。'],
+    ['N', '在臺灣的很多城市，路邊沒有大型垃圾桶。每天到了固定的時間，垃圾車會一邊播放音樂，一邊開進巷子。居民聽到音樂，就提著垃圾出來，親手把垃圾丟進車裡。這就叫做「垃圾不落地」。'],
+    ['N', '這個做法是從一九九〇年代開始的。以前垃圾堆在路邊，又髒又臭，還會引來老鼠。現在街道乾淨多了。'],
+    ['N', '垃圾車後面通常還跟著一輛資源回收車，所以居民要先把紙類、塑膠瓶和廚餘分開。'],
+    ['N', '有趣的是，等垃圾車的時間，也變成了鄰居聊天的時間。'],
+    ['N', '我認為這個例子說明，只要每個人都願意多做一點，就能讓環境變得更好。謝謝大家。']
+  ],
+  questions: [
+    { q: 'What is the presentation mainly about?', o: ['How garbage is collected in many Taiwanese cities', 'Why ice cream trucks play music', 'How to recycle plastic bottles', 'A famous piece of piano music'], a: 0 },
+    { q: 'Why do the garbage trucks play music?', o: ['To entertain the workers', 'To let residents know the truck has arrived', 'To cover the noise of the engine', 'To remind people to recycle'], a: 1 },
+    { q: 'What was the problem in the past?', o: ['There were too few garbage trucks', 'Residents refused to sort their trash', 'Trash piled up by the road was dirty, smelly and attracted rats', 'The music was too loud'], a: 2 },
+    { q: 'What do residents have to do before the recycling truck comes?', o: ['Pay a small fee', 'Wash their trash cans', 'Call the city office', 'Separate paper, plastic bottles and food waste'], a: 3 },
+    { q: 'What unexpected benefit does the speaker mention?', o: ['The trucks create jobs', 'Waiting for the truck has become a time for neighbors to chat', 'Children learn piano music', 'The streets are quieter at night'], a: 1 }
+  ]
+},
+{
+  id: 'L30', type: 'chart', unit: 6, title: '垃圾越來越少',
+  intro: 'You will listen to a report and look at a chart.',
+  speakers: { N: { name: '記者', g: 'f' } },
+  chart: { title: '本市每人每天產生的垃圾量', unit: '公斤', max: 1.2,
+    items: [ ['2006 年', 1.1], ['2011 年', 0.9], ['2016 年', 0.8], ['2021 年', 0.7], ['2026 年', 0.6] ] },
+  lines: [
+    ['N', '本市環保局今天公布了最新的垃圾統計。從圖表可以看出，二十年來，市民每人每天產生的垃圾量不斷減少。'],
+    ['N', '二〇〇六年，每人每天製造一點一公斤的垃圾。今年只剩下零點六公斤，少了將近一半。'],
+    ['N', '環保局表示，垃圾減少的主要原因有兩個：一是資源回收做得越來越好，二是越來越多的人自己帶購物袋和餐具。'],
+    ['N', '不過，環保局也指出，外送餐點的包裝垃圾在最近五年增加了一倍，是目前最需要解決的問題。'],
+    ['N', '下個月起，本市將和外送平台合作，推出可以重複使用的餐盒，希望進一步減少垃圾。']
+  ],
+  questions: [
+    { q: 'What does the chart show?', o: ['How much each person recycles', 'The amount of garbage each person produces per day over twenty years', 'The number of garbage trucks in the city', 'The cost of collecting garbage'], a: 1 },
+    { q: 'According to the chart, in which year did each person produce 0.8 kilograms of garbage a day?', o: ['2006', '2011', '2016', '2021'], a: 2 },
+    { q: 'What is the general trend?', o: ['The amount has steadily decreased', 'The amount has steadily increased', 'The amount went up and then down', 'The amount has not changed'], a: 0 },
+    { q: 'Which reason for the change does the report give?', o: ['The city’s population has fallen', 'Garbage collection has become more expensive', 'Stores no longer sell plastic bags', 'Recycling has improved and more people bring their own bags and utensils'], a: 3 },
+    { q: 'What problem most needs to be solved now?', o: ['Too few recycling trucks', 'Packaging waste from food delivery has doubled', 'People forget their shopping bags', 'Restaurants use too much water'], a: 1 }
+  ]
+}
+);
+
+// Batch 2 (Nov 2026): 21 more reading sets, R10–R30, bringing every task type to six sets.
+// Interleaved by type so the daily commute list rotates. Same format as data_reading.js.
+APZH.reading.push(
+{
+  id: 'R10', type: 'lit', unit: 1, title: '爸爸的便當',
+  intro: 'Read the following passage.',
+  paras: [
+    '上小學的時候，我的便當總是和別人不一樣。同學的便當盒裡裝著三明治和洋芋片，我的卻是白飯、滷蛋和炒青菜。每次打開蓋子，就有同學捏著鼻子問：「那是什麼味道？」',
+    '我開始把便當藏在書包最下面，回家以後再偷偷倒掉。有一天，爸爸在垃圾桶裡發現了沒吃的飯菜。他什麼也沒說，只是看了我一眼，就走進廚房。',
+    '第二天早上，我的便當盒裡多了一張小紙條，上面寫著：「今天的滷蛋，爸爸滷了三個小時。吃不完沒關係，可是不要丟掉爸爸的心意。」',
+    '那天中午，我第一次在同學面前把便當吃完。坐在旁邊的大衛好奇地問我能不能嘗一口滷蛋。他吃完以後睜大眼睛說：「你爸爸可以開餐廳了！」',
+    '現在我上高中了，還是每天帶爸爸做的便當。我終於明白，便當裡裝的不只是飯菜，還有爸爸說不出口的愛。'
+  ],
+  questions: [
+    { q: 'Why did the narrator hide the lunch box at first?', o: ['Classmates reacted badly to how different it was', 'The food was often cold', 'The lunch box was too heavy', 'The teacher did not allow home lunches'], a: 0 },
+    { q: 'What did the father do after finding the thrown-away food?', o: ['He scolded the narrator', 'He said nothing and put a note in the lunch box the next day', 'He stopped making lunch', 'He called the school'], a: 1 },
+    { q: 'What can be inferred from the father’s note?', o: ['He wanted the narrator to cook', 'He planned to open a restaurant', 'He had put great effort into the food and was hurt, but understanding', 'He thought the narrator ate too little'], a: 2 },
+    { q: 'How did David react after tasting the braised egg?', o: ['He held his nose', 'He asked for the recipe', 'He laughed at the narrator', 'He was very impressed'], a: 3 },
+    { q: 'What is the main message of the passage?', o: ['Children should learn to cook', 'A homemade lunch can carry a parent’s unspoken love', 'School lunches should be healthier', 'Friends should share their food'], a: 1 }
+  ]
+},
+{
+  id: 'R11', type: 'article', unit: 5, title: '公共自行車',
+  intro: 'Read the following article.',
+  paras: [
+    '在臺灣的許多城市，街上到處看得到公共自行車。市民只要用悠遊卡或手機，就能在任何一個車站借車，騎到目的地以後，再把車還到附近的車站。',
+    '公共自行車受歡迎的原因很多。首先，費用便宜，前三十分鐘只要幾塊錢。其次，很多車站就設在捷運站和公車站旁邊，下了車可以直接騎車回家，解決了「最後一公里」的問題。此外，騎車不排放廢氣，對環境也有好處。',
+    '不過，公共自行車也有一些問題。上下班時間，熱門車站的車常常被借光；有的人騎車不遵守交通規則，在人行道上騎得很快，讓行人覺得很危險。',
+    '為了解決這些問題，市政府一方面增加車站和車輛，另一方面也在學校推廣騎車安全教育。有了更完善的設施和守規矩的騎士，公共自行車才能真正成為城市交通的好幫手。'
+  ],
+  questions: [
+    { q: 'What is the article mainly about?', o: ['How to repair a bicycle', 'Why public bicycles are popular and what problems they face', 'The history of the metro', 'A new traffic law'], a: 1 },
+    { q: 'What does 「最後一公里」 refer to?', o: ['The short distance between a transit station and one’s destination', 'The last part of a bicycle race', 'The longest route in the city', 'A discount for short rides'], a: 0 },
+    { q: 'Which benefit is NOT mentioned in the article?', o: ['The fee is low', 'Stations are close to public transit', 'Riding does not produce exhaust', 'Riding is faster than taking the metro'], a: 3 },
+    { q: 'What problem occurs during rush hour?', o: ['The fee goes up', 'Stations close early', 'Popular stations run out of bicycles', 'Bicycles are not allowed on the roads'], a: 2 },
+    { q: 'According to the last paragraph, what is needed for public bicycles to work well?', o: ['Lower prices and more advertising', 'Better facilities and riders who follow the rules', 'Fewer stations near schools', 'A ban on riding at night'], a: 1 }
+  ]
+},
+{
+  id: 'R12', type: 'artchart', unit: 4, title: '青少年上網買東西',
+  intro: 'Read the following article and chart.',
+  chart: { title: '青少年在網路上最常買的東西', unit: '%', max: 40,
+    items: [ ['衣服和鞋子', 36], ['文具和書', 22], ['電子產品', 18], ['零食和飲料', 14], ['其他', 10] ] },
+  paras: [
+    '網路購物已經成為年輕人生活的一部分。根據一項針對一千名十三到十八歲青少年的調查，有八成的人曾經在網路上買過東西，其中最常買的是衣服和鞋子。',
+    '青少年喜歡網路購物，主要是因為價錢比較便宜、選擇比較多，而且不用出門。但是調查也發現，有四成五的人買過「跟圖片不一樣」的商品，還有三成的人曾經因為一時衝動，買了根本用不到的東西。',
+    '消費者保護團體提醒，在網路上買東西以前，應該先看看其他買家的評價，並且確認能不能退貨。另外，未成年人購物最好先和父母商量，不要隨便把個人資料告訴別人。'
+  ],
+  questions: [
+    { q: 'What is the main purpose of the article?', o: ['To describe teenagers’ online shopping habits and give advice', 'To advertise an online store', 'To explain how to return a product', 'To compare prices in stores and online'], a: 0 },
+    { q: 'According to the chart, what do teenagers buy second most often?', o: ['Clothes and shoes', 'Stationery and books', 'Electronics', 'Snacks and drinks'], a: 1 },
+    { q: 'Which statement is supported by the article and the chart?', o: ['Most teenagers have never shopped online', 'Electronics are the most popular purchase', 'Clothes and shoes are what more than a third of teenagers buy most often', 'Snacks are bought more often than books'], a: 2 },
+    { q: 'What problem had forty-five percent of the teenagers experienced?', o: ['Their package never arrived', 'They paid twice for one item', 'Their personal information was stolen', 'The item they received did not match the picture'], a: 3 },
+    { q: 'What does the consumer group advise shoppers to do before buying?', o: ['Pay in cash only', 'Read other buyers’ reviews and check whether returns are allowed', 'Buy only from stores abroad', 'Wait for a holiday sale'], a: 1 }
+  ]
+},
+{
+  id: 'R13', type: 'corr', unit: 5, title: '大學的第一個月',
+  intro: 'Read the following email.',
+  meta: { from: '雅文', to: '小弟', subject: '大學的第一個月' },
+  paras: [
+    '小弟：',
+    '好久沒寫信給你了。我到臺中念大學已經一個月了，一切都還在慢慢適應。宿舍是四個人一間，我的室友來自不同的地方，有一位是從馬來西亞來的僑生，她的中文、英文和馬來文都說得很好，常常教我們幾句馬來話。',
+    '大學和高中最大的不同，是沒有人管你。早上沒有人叫你起床，功課也沒有人催。剛開始我覺得很自由，結果第一個星期就遲到了兩次，還忘了交一份報告。現在我學會用手機的行事曆，把每天要做的事記下來。',
+    '我參加了登山社，上個週末第一次跟社團去爬合歡山。雖然累得腿都快斷了，可是在山頂看到日出的那一刻，覺得一切都值得。',
+    '你明年也要上高中了，我的建議是：早一點學會自己安排時間，將來會輕鬆很多。媽媽說你最近迷上打電動，要適可而止喔！',
+    '寒假回家再聊。',
+    '姊姊　雅文'
+  ],
+  questions: [
+    { q: 'Why did Yawen write this email?', o: ['To ask her brother for help with a report', 'To share her first month of college and give some advice', 'To invite her brother to climb a mountain', 'To complain about her roommates'], a: 1 },
+    { q: 'What do we learn about one of her roommates?', o: ['She is an overseas student from Malaysia who speaks three languages', 'She is the president of the hiking club', 'She is often late for class', 'She teaches English at the university'], a: 0 },
+    { q: 'What problem did Yawen have in her first week?', o: ['She got lost on campus', 'She argued with a roommate', 'She was late twice and forgot to hand in a report', 'She lost her phone'], a: 2 },
+    { q: 'How did Yawen feel at the top of the mountain?', o: ['She regretted joining the club', 'She was too tired to enjoy it', 'She was afraid of the height', 'She felt the hard climb had been worth it'], a: 3 },
+    { q: 'In the fourth paragraph, 「適可而止」 most nearly means', o: ['to try harder', 'to know when to stop', 'to start right away', 'to ask for permission'], a: 1 }
+  ]
+},
+{
+  id: 'R14', type: 'promo', unit: 3, title: '青少年國樂團音樂會',
+  intro: 'Read the following poster.',
+  ad: [
+    ['h', '青少年國樂團　年度音樂會「絲竹新聲」'],
+    ['li', '時間：十二月十九日（星期六）晚上 7:30（7:00 開放入場）'],
+    ['li', '地點：市立文化中心音樂廳'],
+    ['li', '曲目：傳統名曲《茉莉花》、《彩雲追月》，以及用二胡、琵琶演奏的電影配樂'],
+    ['li', '票價：全票 300 元、學生票 150 元；六歲以下兒童請勿入場'],
+    ['b', '會前導聆'],
+    ['li', '當天晚上 6:45，指揮將在大廳介紹樂器和曲目，免費參加'],
+    ['star', '優惠：十二月五日以前購票，全票、學生票一律八折；十人以上團體七折'],
+    ['star', '購票方式：文化中心售票處，或上網訂票（網路訂票每張加收 20 元手續費）'],
+    ['star', '注意事項：演出中請關閉手機，禁止錄音、錄影；遲到的觀眾須等到中場休息才能入場']
+  ],
+  questions: [
+    { q: 'What is being advertised?', o: ['A music class for children', 'A concert by a youth Chinese orchestra', 'A film festival', 'A sale of musical instruments'], a: 1 },
+    { q: 'Besides traditional pieces, what will be performed?', o: ['Film music played on traditional instruments', 'Popular songs sung by the audience', 'A piano concerto', 'A new opera'], a: 0 },
+    { q: 'A student buys one ticket at the box office on December 1. How much does it cost?', o: ['NT$105', 'NT$120', 'NT$140', 'NT$150'], a: 1 },
+    { q: 'What happens to audience members who arrive late?', o: ['They get a refund', 'They may enter quietly at any time', 'They must wait until the intermission to enter', 'They must buy a new ticket'], a: 2 },
+    { q: 'What is true about the pre-concert talk?', o: ['It requires a separate ticket', 'It is held after the concert', 'It is only for young children', 'The conductor introduces the instruments and the pieces'], a: 3 }
+  ]
+},
+{
+  id: 'R15', type: 'lit', unit: 2, title: '歪歪的「春」字',
+  intro: 'Read the following passage.',
+  paras: [
+    '每年除夕前幾天，外公都會在客廳的大桌子上鋪好紅紙，磨好墨，準備寫春聯。小時候的我，總是趴在桌邊看他寫字。毛筆在他手裡好像有了生命，一筆一畫，又穩又有力。',
+    '十歲那年，外公第一次讓我試試看。我拿起毛筆，手卻抖個不停，寫出來的「春」字歪歪斜斜，像一隻喝醉的螃蟹。我氣得把紙揉成一團。',
+    '外公撿起紙團，慢慢攤開，笑著說：「字跟人一樣，要先站得穩，才能走得好。你太急了。」他握著我的手，帶著我一筆一筆地寫。我感覺到他手心的溫度，也感覺到筆尖落在紙上的輕重。',
+    '那一年，我們家的大門上貼著外公寫的春聯，我房間的門上，則貼著那個歪歪的「春」字。外公說，那是全家最有精神的一個字。',
+    '外公去年過世了。今年除夕，我鋪好紅紙，磨好墨，寫下了一個「春」字。它還是不夠漂亮，可是我知道，外公一定會說：「站得很穩。」'
+  ],
+  questions: [
+    { q: 'What tradition does the passage describe?', o: ['Writing spring couplets with a brush before Lunar New Year', 'Painting eggs in spring', 'Making red lanterns', 'Giving red envelopes'], a: 0 },
+    { q: 'Why did the narrator crumple the paper?', o: ['The ink had spilled', 'The narrator was frustrated with the badly written character', 'The grandfather asked for it', 'The paper was the wrong color'], a: 1 },
+    { q: 'What did the grandfather mean by 「要先站得穩，才能走得好」?', o: ['The narrator should stand up while writing', 'Children should exercise more', 'One must patiently master the basics before doing well', 'Writing quickly is the key to good calligraphy'], a: 2 },
+    { q: 'Where was the narrator’s character put up?', o: ['On the front door', 'In the living room', 'In the grandfather’s study', 'On the narrator’s bedroom door'], a: 3 },
+    { q: 'What does the ending suggest?', o: ['The narrator has given up calligraphy', 'The narrator carries on the tradition and remembers the grandfather’s teaching', 'The narrator now writes better than the grandfather', 'The family no longer celebrates the New Year'], a: 1 }
+  ]
+},
+{
+  id: 'R16', type: 'article', unit: 2, title: '有趣的諧音',
+  intro: 'Read the following article.',
+  paras: [
+    '中文裡有很多發音相同或相近的字，這種現象叫做「諧音」。諧音不只讓中文變得有趣，也影響了華人的許多習俗。',
+    '過年的時候，餐桌上一定要有魚，因為「魚」和「餘」同音，代表「年年有餘」。許多人喜歡把「福」字倒過來貼，因為「倒」和「到」同音，意思是「福到了」。探望病人的時候，送蘋果很合適，因為「蘋」和「平」同音，有祝福對方平安的意思。',
+    '不過，諧音也帶來了不少禁忌。送禮的時候不能送時鐘，因為「送鐘」聽起來像「送終」；情人不能分吃一個梨，因為「分梨」和「分離」同音。很多醫院和大樓沒有四樓，也是因為「四」聽起來像「死」。',
+    '年輕一代也用諧音創造了新的網路用語，例如用數字「五二〇」表示「我愛你」，用「八八」表示「再見」。',
+    '從這些例子可以看出，語言不只是溝通的工具，也反映了人們對幸福的期待和對不幸的害怕。了解諧音，就更能了解華人文化。'
+  ],
+  questions: [
+    { q: 'What is the main idea of the article?', o: ['Chinese is hard to pronounce', 'Words that sound alike have shaped customs, taboos and new slang', 'Young people no longer follow traditions', 'Numbers are unlucky in Chinese culture'], a: 1 },
+    { q: 'Why is fish served at the New Year’s table?', o: ['The word for fish sounds like the word for surplus', 'Fish is the most expensive dish', 'Fish is easy to cook for many people', 'Fish is believed to bring good health'], a: 0 },
+    { q: 'According to the article, which is a suitable gift for someone who is ill?', o: ['A clock', 'A pear to share', 'Apples', 'Four flowers'], a: 2 },
+    { q: 'Why do many buildings have no fourth floor?', o: ['Building rules do not allow it', 'The fourth floor is used for storage', 'It is cheaper to skip a floor', 'The word for four sounds like the word for death'], a: 3 },
+    { q: 'What is the purpose of the fourth paragraph?', o: ['To criticize internet slang', 'To show that young people keep creating expressions based on similar sounds', 'To explain how to write numbers in Chinese', 'To compare Chinese with other languages'], a: 1 }
+  ]
+},
+{
+  id: 'R17', type: 'artchart', unit: 6, title: '高鐵帶來的改變',
+  intro: 'Read the following article and chart.',
+  chart: { title: '從臺北到高雄大約需要的時間', unit: '小時', max: 6,
+    items: [ ['高鐵', 2], ['開車', 4], ['火車', 4.5], ['客運', 5] ] },
+  paras: [
+    '二〇〇七年，臺灣高速鐵路正式通車，把臺北到高雄的時間從四個多小時縮短到兩個小時以內。臺灣西部從此進入「一日生活圈」的時代。',
+    '高鐵改變了許多人的生活方式。住在臺中的上班族，可以每天坐高鐵到臺北上班；住在北部的遊客，可以早上出發到南部看展覽、吃小吃，晚上再回家。',
+    '然而，高鐵也帶來了一些影響。由於搭高鐵又快又方便，臺灣西部的國內航線乘客大量減少，後來幾乎全部停飛。另外，高鐵的票價比火車和客運貴，對學生來說是不小的負擔。',
+    '從圖表可以看到，客運雖然最慢，卻因為票價最便宜，仍然受到學生的歡迎。交通專家認為，不同的交通工具各有優點，旅客可以依照自己的時間和預算來選擇。'
+  ],
+  questions: [
+    { q: 'What is the article mainly about?', o: ['How high-speed rail changed travel and life in western Taiwan', 'How to buy a train ticket', 'Why buses are disappearing', 'The cost of building a railway'], a: 0 },
+    { q: 'What does 「一日生活圈」 mean?', o: ['People work only one day a week', 'People can travel between cities and return within a day', 'Every city has a one-day festival', 'Trains run for only one day'], a: 1 },
+    { q: 'According to the chart, about how much time does high-speed rail save compared with the regular train?', o: ['About 1 hour', 'About 2 hours', 'About 2.5 hours', 'About 3 hours'], a: 2 },
+    { q: 'What was one effect of high-speed rail?', o: ['Train tickets became cheaper', 'More people moved to the east coast', 'Highways were closed', 'Domestic flights in the west lost most of their passengers'], a: 3 },
+    { q: 'Why do many students still take the bus?', o: ['It is the fastest', 'It is the cheapest', 'It is the most comfortable', 'It stops at their schools'], a: 1 }
+  ]
+},
+{
+  id: 'R18', type: 'corr', unit: 6, title: '暑期交流計畫錄取通知',
+  intro: 'Read the following letter.',
+  meta: { from: '國際教育中心', to: '林同學', subject: '暑期交流計畫錄取通知' },
+  paras: [
+    '林同學，您好：',
+    '恭喜您！經過書面審查和面試，您已經錄取本中心今年的「新加坡暑期交流計畫」。本計畫將於七月六日出發，七月二十六日回國，一共三個星期。',
+    '在新加坡期間，您將住在當地的寄宿家庭，週一到週五上午在當地中學上課，下午參加文化活動，例如參觀小印度和牛車水、學做海南雞飯、訪問當地的雙語學校。週末則由寄宿家庭安排。',
+    '請您在四月三十日以前完成以下三件事：一、上網填寫健康調查表；二、繳交護照影本；三、繳交費用新臺幣四萬五千元（包含機票、保險和學費，不包含個人零用錢）。家庭經濟有困難的同學可以申請獎學金，申請表請在四月十五日以前交到本中心。',
+    '五月二十日（星期六）上午十點，我們將在本中心舉辦行前說明會，請您和一位家長務必參加。',
+    '如有任何問題，歡迎來信詢問。',
+    '國際教育中心　敬上'
+  ],
+  questions: [
+    { q: 'What is the main purpose of the letter?', o: ['To invite the student to an interview', 'To tell the student of acceptance and explain the next steps', 'To advertise a summer camp', 'To ask the student’s family to host a visitor'], a: 1 },
+    { q: 'How long is the program?', o: ['Three weeks', 'One month', 'Six weeks', 'Two months'], a: 0 },
+    { q: 'What will students do on weekday afternoons?', o: ['Attend classes at a local school', 'Stay with their host families', 'Take part in cultural activities', 'Have free time on their own'], a: 2 },
+    { q: 'What is NOT included in the fee?', o: ['Airfare', 'Insurance', 'Tuition', 'Personal spending money'], a: 3 },
+    { q: 'What must a student who wants a scholarship do?', o: ['Attend an extra interview', 'Hand in the application by April 15', 'Write a letter to the host family', 'Pay the full fee first'], a: 1 }
+  ]
+},
+{
+  id: 'R19', type: 'promo', unit: 1, title: '食物銀行招募志工',
+  intro: 'Read the following notice.',
+  ad: [
+    ['h', '社區食物銀行　招募青少年志工'],
+    ['li', '服務內容：整理捐贈的食物、檢查保存期限、把食物包裝成「愛心箱」'],
+    ['li', '服務時間：每週六上午 9:00–12:00，或每週三下午 4:00–6:00（可以只選一個時段）'],
+    ['li', '服務地點：社區活動中心一樓'],
+    ['li', '報名資格：十二歲到十八歲；十四歲以下須有家長陪同'],
+    ['b', '志工可以得到'],
+    ['li', '服務滿 20 小時，發給服務證明'],
+    ['li', '每次服務提供點心和飲料'],
+    ['star', '行前訓練：第一次服務以前，必須先參加一小時的食品安全課程（每月第一個週六上午 8:00）'],
+    ['star', '報名方式：填寫網路報名表，或打電話到活動中心'],
+    ['star', '特別需要：會說臺語或客家話的志工，幫忙和長輩溝通']
+  ],
+  questions: [
+    { q: 'What is the purpose of the notice?', o: ['To recruit teenage volunteers for a food bank', 'To ask for food donations', 'To advertise a cooking class', 'To announce a food safety inspection'], a: 0 },
+    { q: 'Which task will volunteers do?', o: ['Deliver food by bicycle', 'Check expiration dates and pack food boxes', 'Cook meals for the elderly', 'Collect money from neighbors'], a: 1 },
+    { q: 'Who must be accompanied by a parent?', o: ['All volunteers', 'Volunteers who work on Wednesdays', 'Volunteers aged fourteen or younger', 'Volunteers who do not speak Taiwanese'], a: 2 },
+    { q: 'A volunteer serves every Saturday morning. After how many Saturdays will the volunteer first qualify for a service certificate?', o: ['Five', 'Six', 'Seven', 'Ten'], a: 2 },
+    { q: 'Why does the food bank especially want volunteers who speak Taiwanese or Hakka?', o: ['To translate the notice', 'To teach the other volunteers', 'To answer the telephone', 'To communicate with elderly people'], a: 3 }
+  ]
+},
+{
+  id: 'R20', type: 'lit', unit: 2, title: '塞翁失馬',
+  intro: 'Read the following story.',
+  paras: [
+    '從前，在北方的邊境住著一位老人，大家都叫他塞翁。有一天，他養的一匹馬不知道為什麼跑到了邊境外面，再也沒有回來。鄰居們都來安慰他，塞翁卻說：「丟了一匹馬，怎麼知道不是一件好事呢？」',
+    '過了幾個月，那匹馬竟然自己回來了，還帶回了一匹又高又壯的駿馬。鄰居們紛紛來向他道賀，塞翁卻皺著眉頭說：「白白得到一匹好馬，怎麼知道不是一件壞事呢？」',
+    '塞翁的兒子非常喜歡那匹駿馬，天天騎著牠出去玩。有一天，他從馬背上摔下來，摔斷了腿。鄰居們又來安慰塞翁，塞翁還是平靜地說：「這怎麼知道不是一件好事呢？」',
+    '一年以後，邊境發生了戰爭，村子裡的年輕人都被叫去打仗，很多人再也沒有回來。塞翁的兒子因為腿不方便，留在家裡，父子兩人平安地活了下來。',
+    '後來，人們用「塞翁失馬，焉知非福」這句話來說明：好事和壞事常常會互相轉變，遇到不順利的事，不必太難過。'
+  ],
+  questions: [
+    { q: 'How did the old man react when he lost his horse?', o: ['He blamed his neighbors', 'He stayed calm and said it might turn out well', 'He searched for it day and night', 'He bought a new horse'], a: 1 },
+    { q: 'Why did the neighbors congratulate him?', o: ['His horse came back and brought a fine horse with it', 'His son won a horse race', 'He sold his horse for a high price', 'The war had ended'], a: 0 },
+    { q: 'What happened to the old man’s son?', o: ['He ran away with the horse', 'He became a soldier', 'He fell from the horse and broke his leg', 'He moved across the border'], a: 2 },
+    { q: 'Why did the son survive the war?', o: ['He was a skilled rider', 'His father hid him in the mountains', 'The war never reached the village', 'His injured leg kept him from being sent to fight'], a: 3 },
+    { q: 'What lesson does the story teach?', o: ['Horses bring both wealth and danger', 'Good and bad fortune can turn into each other, so setbacks need not upset us too much', 'Neighbors cannot be trusted', 'Old people are always right'], a: 1 }
+  ]
+},
+{
+  id: 'R21', type: 'article', unit: 3, title: '翠玉白菜',
+  intro: 'Read the following article.',
+  paras: [
+    '走進臺北的故宮博物院，最多遊客排隊想看的，不是巨大的青銅器，也不是名家的書畫，而是一棵用玉石雕成的白菜，叫做「翠玉白菜」。',
+    '這件作品來自清朝，長度還不到十九公分，比一支手機大不了多少。它最特別的地方，是工匠巧妙地利用了玉石本來的顏色：白色的部分雕成菜梗，綠色的部分雕成菜葉，看起來就像一棵剛從菜園裡拔出來的新鮮白菜。',
+    '仔細看，菜葉上還停著兩隻小昆蟲。在傳統文化裡，白菜象徵「清白」，而這兩種昆蟲繁殖力很強，代表「多子多孫」。因此，許多學者認為，這件作品可能是一位清朝妃子的嫁妝。',
+    '有趣的是，白菜是華人餐桌上最普通的蔬菜，工匠卻選擇用珍貴的玉石來表現它。這說明，藝術的價值不一定來自特別的題材；日常生活中最平凡的東西，只要有巧思和好的技術，也能成為動人的作品。'
+  ],
+  questions: [
+    { q: 'What is the article mainly about?', o: ['A famous jade carving and what makes it special', 'How to grow cabbage', 'The history of a museum', 'A Qing dynasty wedding'], a: 0 },
+    { q: 'What is most special about the work?', o: ['It is the largest piece in the museum', 'The craftsman used the natural colors of the jade for the stalk and the leaves', 'It was made by a famous painter', 'It is more than two thousand years old'], a: 1 },
+    { q: 'What do the two insects on the leaves represent?', o: ['Hard work', 'Long life', 'Having many children and grandchildren', 'A good harvest'], a: 2 },
+    { q: 'Why do scholars think the work may have been part of a dowry?', o: ['It was found in a bride’s tomb', 'A letter about it has been found', 'It was very expensive', 'Its symbols of purity and many descendants suit a bride'], a: 3 },
+    { q: 'What point does the author make in the last paragraph?', o: ['Jade is too valuable for ordinary subjects', 'Ordinary things can become moving art through ingenuity and skill', 'Museums should show more everyday objects', 'Vegetables are important in Chinese cooking'], a: 1 }
+  ]
+},
+{
+  id: 'R22', type: 'artchart', unit: 1, title: '長輩和誰住在一起',
+  intro: 'Read the following article and chart.',
+  chart: { title: '六十五歲以上長輩的居住方式', unit: '%', max: 50,
+    items: [ ['和子女同住', 48], ['只和配偶同住', 26], ['獨居', 14], ['住在養老院', 5], ['其他', 7] ] },
+  paras: [
+    '在傳統的華人社會，父母年紀大了以後和兒子、媳婦、孫子住在一起，是很自然的事，這種家庭叫做「三代同堂」。然而，隨著社會的改變，長輩的居住方式也越來越多樣。',
+    '根據一項調查，目前仍有將近一半的長輩和子女同住，但是比例比二十年前少了很多。只和配偶同住以及獨居的長輩，加起來已經有四成。',
+    '為什麼會有這樣的變化？一方面，許多年輕人到大城市或國外工作，沒辦法住在父母身邊；另一方面，現在的長輩身體比較健康，也比較重視自己的生活空間。一位七十歲的奶奶說：「住得近比住在一起好，想孫子的時候去看看，又不會互相打擾。」',
+    '不過，獨居的長輩如果生病或跌倒，可能沒有人馬上發現。因此，有些社區成立了關懷站，由志工每天打電話或上門問候，讓長輩即使不和子女同住，也能得到照顧。'
+  ],
+  questions: [
+    { q: 'What is the main idea of the article?', o: ['Nursing homes are becoming popular', 'The living arrangements of older people are becoming more varied', 'Young people no longer care about their parents', 'Three-generation families have disappeared'], a: 1 },
+    { q: 'According to the chart, which living arrangement is most common?', o: ['Living with their children', 'Living only with a spouse', 'Living alone', 'Living in a nursing home'], a: 0 },
+    { q: 'According to the chart, what percentage of older people live either alone or only with a spouse?', o: ['14%', '26%', '40%', '48%'], a: 2 },
+    { q: 'What does the seventy-year-old grandmother’s remark suggest?', o: ['She feels lonely living alone', 'She wants to move to a big city', 'She dislikes her grandchildren’s visits', 'She prefers to live near her family but not with them'], a: 3 },
+    { q: 'What do the community care stations do?', o: ['They provide housing for older people', 'Volunteers call or visit older people every day', 'They teach older people to use phones', 'They find jobs for young people'], a: 1 }
+  ]
+},
+{
+  id: 'R23', type: 'corr', unit: 2, title: '檳城的新年',
+  intro: 'Read the following letter.',
+  meta: { from: '麗雯', to: '小安', subject: '我們這裡怎麼過新年' },
+  paras: [
+    '小安：',
+    '收到你的信真開心！你問我馬來西亞的華人怎麼過農曆新年，我來告訴你幾件有趣的事。',
+    '除夕晚上，我們全家一定會回到爺爺奶奶在檳城的老家吃團圓飯。吃飯以前有一個特別的活動，叫做「撈生」。桌子中間放一大盤生魚片和切成絲的蔬菜，全家人站起來，用筷子把菜高高地夾起來，一邊夾一邊大聲說吉祥話。聽說夾得越高，新的一年就越順利。每次撈完，桌上總是亂七八糟的，可是大家都笑得很開心。',
+    '還有一個習慣你可能沒聽過：新年期間，很多家庭會「開放門戶」，請朋友和鄰居到家裡來坐坐、吃點心。我的馬來同學和印度同學都會來我家拜年，我們也會在他們過節的時候去他們家。媽媽說，這樣大家才會越來越了解彼此的文化。',
+    '對了，我們這裡一年到頭都是夏天，所以過年的時候穿的是短袖的新衣服。你們那裡過年會下雪嗎？下次寫信的時候，寄幾張照片給我看看吧！',
+    '祝　新年快樂',
+    '麗雯'
+  ],
+  questions: [
+    { q: 'What is the main purpose of the letter?', o: ['To describe how Chinese families in Malaysia celebrate Lunar New Year', 'To invite Xiaoan to Penang', 'To ask about the weather where Xiaoan lives', 'To share a recipe'], a: 0 },
+    { q: 'What do people do during 「撈生」?', o: ['Cook fish soup together', 'Toss fish and vegetables high with chopsticks while saying lucky phrases', 'Give red envelopes to children', 'Clean the table before dinner'], a: 1 },
+    { q: 'Why do people try to lift the food high?', o: ['To mix the sauce well', 'To show off their chopstick skills', 'They believe it brings a smoother year', 'To keep the food away from children'], a: 2 },
+    { q: 'According to Liwen’s mother, what is good about the open-house custom?', o: ['It saves money on food', 'It lets children collect more red envelopes', 'It keeps the house clean', 'It helps people understand each other’s cultures'], a: 3 },
+    { q: 'What can be inferred about where Liwen lives?', o: ['It snows at New Year', 'It is hot all year round', 'It is far from her grandparents’ home', 'Few Chinese families live there'], a: 1 }
+  ]
+},
+{
+  id: 'R24', type: 'promo', unit: 4, title: '圖書館電子書',
+  intro: 'Read the following notice.',
+  ad: [
+    ['h', '市立圖書館　電子書借閱服務　全新上線'],
+    ['li', '只要有借書證，就能用手機、平板或電腦免費借閱三萬多本電子書和有聲書'],
+    ['li', '每人每次最多借 6 本，借期 14 天；到期自動歸還，不必擔心逾期罰款'],
+    ['li', '熱門書籍可以預約，輪到你的時候會用電子郵件通知'],
+    ['b', '三個步驟開始閱讀'],
+    ['li', '一、下載「市圖電子書」應用程式'],
+    ['li', '二、輸入借書證號碼和密碼'],
+    ['li', '三、選一本書，按「借閱」'],
+    ['star', '還沒有借書證？帶學生證或身分證到任何一間分館辦理，五分鐘就能完成'],
+    ['star', '暑假閱讀挑戰：七、八月借閱滿 10 本，就能參加抽獎，獎品是平板電腦一台'],
+    ['star', '小提醒：有聲書很適合在通勤的時候聽，請記得戴耳機']
+  ],
+  questions: [
+    { q: 'What is the purpose of the notice?', o: ['To announce new library hours', 'To introduce the library’s e-book lending service', 'To sell tablets', 'To recruit library volunteers'], a: 1 },
+    { q: 'What happens when the loan period ends?', o: ['The book is returned automatically', 'The reader pays a small fine', 'The reader must visit a branch', 'The book can no longer be borrowed'], a: 0 },
+    { q: 'What does a reader need in order to use the service?', o: ['A credit card', 'A new tablet', 'A library card', 'A letter from school'], a: 2 },
+    { q: 'How can a reader enter the prize drawing?', o: ['Apply for a library card in July', 'Reserve a popular book', 'Download the app', 'Borrow ten books during July and August'], a: 3 },
+    { q: 'When does the notice suggest listening to audiobooks?', o: ['Before going to sleep', 'While commuting', 'During class', 'While exercising'], a: 1 }
+  ]
+},
+{
+  id: 'R25', type: 'lit', unit: 6, title: '村口的老榕樹',
+  intro: 'Read the following passage.',
+  paras: [
+    '我們村子口有一棵老榕樹。爺爺說，他小的時候，這棵樹就已經那麼大了。夏天的午後，樹下總是坐滿了人：老人下棋，媽媽們聊天，孩子們抓著垂下來的樹根盪來盪去。',
+    '去年春天，鄉公所貼出公告，說為了拓寬馬路，要把老榕樹砍掉。消息一傳開，整個村子都安靜了。',
+    '開會那天，有人說：「路寬了，車子進出才方便，村子才會進步。」也有人說：「樹砍了，就再也種不回來了。」大人們吵得面紅耳赤，誰也說服不了誰。',
+    '這時候，平常很少說話的阿土伯站了起來。他什麼大道理也沒講，只說：「我太太還在的時候，每天傍晚都在樹下等我回家。」會場一下子安靜下來。我看見好幾個大人低下了頭。',
+    '後來，馬路還是拓寬了，只是在村子口轉了一個小小的彎，繞過了老榕樹。開車的人經過這裡，都得放慢速度。爺爺說，這樣也好，慢一點，才看得見樹下的人。'
+  ],
+  questions: [
+    { q: 'What role does the banyan tree play in village life?', o: ['It is a gathering place for people of all ages', 'It marks the village’s border', 'It provides fruit for the villagers', 'It is where the village meetings are held'], a: 0 },
+    { q: 'Why was the tree going to be cut down?', o: ['It was old and sick', 'To widen the road', 'To build a new office', 'It blocked the sunlight'], a: 1 },
+    { q: 'What was the disagreement at the meeting?', o: ['Who should pay for the road', 'Where to plant a new tree', 'Convenience and progress versus keeping something that cannot be replaced', 'Whether children should play under the tree'], a: 2 },
+    { q: 'Why did the room fall silent after Uncle Atu spoke?', o: ['He was the village leader', 'He shouted at everyone', 'He announced the final decision', 'His memory reminded people of what the tree meant to them'], a: 3 },
+    { q: 'What does the grandfather’s remark at the end suggest?', o: ['Driving slowly is safer for children', 'Slowing down lets people notice what really matters', 'The road should not have been widened', 'Old people dislike cars'], a: 1 }
+  ]
+},
+{
+  id: 'R26', type: 'article', unit: 4, title: '有了翻譯軟體，還要學外語嗎？',
+  intro: 'Read the following article.',
+  paras: [
+    '現在，只要拿出手機，對著它說一句話，翻譯軟體就能馬上把這句話變成另一種語言。有人因此認為，將來人們再也不需要辛苦地學習外語了。真的是這樣嗎？',
+    '翻譯軟體確實很方便。出國旅行的時候，它可以幫我們問路、點菜；看不懂的外文網頁，按一個鍵就能翻成中文。對於只需要簡單溝通的人來說，翻譯軟體已經夠用了。',
+    '然而，語言不只是一個一個的字。同一句「你吃飯了嗎？」，在華人社會裡常常只是打招呼，並不是真的想知道對方吃了沒有。機器可以翻譯字面的意思，卻不一定懂得話裡的感情和文化。此外，朋友之間的玩笑、詩歌裡的美感，也很難靠機器完全表達出來。',
+    '更重要的是，學習一種語言的過程，本身就是認識另一種文化、另一種想法的機會。一位語言學教授說：「翻譯軟體像一座橋，可以帶你到對岸；但是只有學會那裡的語言，你才能真正住下來。」',
+    '因此，科技也許會改變我們學外語的方式，卻不會讓學外語變得沒有意義。'
+  ],
+  questions: [
+    { q: 'What question does the article explore?', o: ['Which translation software is best', 'Whether translation technology makes learning languages unnecessary', 'How to learn a language quickly', 'Why phones are useful when traveling'], a: 1 },
+    { q: 'According to the second paragraph, when is translation software good enough?', o: ['When people only need simple communication', 'When people read poetry', 'When people make friends abroad', 'When people study at a university'], a: 0 },
+    { q: 'Why does the author mention 「你吃飯了嗎？」?', o: ['To teach a useful travel phrase', 'To show that machines translate food words badly', 'To show that words can carry cultural meaning beyond their literal sense', 'To explain Chinese eating habits'], a: 2 },
+    { q: 'What does the professor’s comparison to a bridge mean?', o: ['Software is expensive to build', 'Learning a language takes as long as building a bridge', 'Translation software will soon be replaced', 'Software can get you by, but real understanding requires learning the language'], a: 3 },
+    { q: 'What is the author’s conclusion?', o: ['Schools should stop teaching foreign languages', 'Technology may change how we learn languages, but learning them still matters', 'Translation software should be banned in class', 'Only some languages are worth learning'], a: 1 }
+  ]
+},
+{
+  id: 'R27', type: 'artchart', unit: 3, title: '年輕人怎麼聽音樂',
+  intro: 'Read the following article and chart.',
+  chart: { title: '青少年最常用的聽音樂方式', unit: '%', max: 50,
+    items: [ ['串流音樂平台', 46], ['影音網站', 31], ['現場演出', 13], ['廣播', 6], ['CD 或唱片', 4] ] },
+  paras: [
+    '二十年前，年輕人想聽喜歡的歌，得到唱片行買 CD。現在，只要打開手機，幾千萬首歌隨時都能聽。一項針對青少年的調查顯示，將近八成的人主要透過串流平台和影音網站聽音樂，買 CD 的人已經非常少。',
+    '聽音樂的方式改變了，喜歡的音樂也變得更多樣。透過網路，臺灣的學生可以聽到韓國的流行歌、美國的嘻哈，也可以聽到用客家話、原住民語言演唱的歌曲。有些歌手把傳統樂器的聲音加進流行音樂裡，受到年輕人的歡迎。',
+    '值得注意的是，雖然在網路上聽歌又方便又便宜，仍然有百分之十三的青少年說，他們最喜歡的是聽現場演出。一位高中生說：「在演唱會上，幾千個人一起唱同一首歌，那種感動是手機給不了的。」',
+    '音樂老師認為，不管用什麼方式聽，重要的是學會用心聽。他建議學生偶爾關掉螢幕，閉上眼睛，好好聽完一整首歌。'
+  ],
+  questions: [
+    { q: 'What is the article mainly about?', o: ['How the way young people listen to music has changed', 'How to become a singer', 'Why CDs are better than phones', 'The history of traditional instruments'], a: 0 },
+    { q: 'According to the chart, which way of listening is least common?', o: ['Radio', 'CDs or records', 'Live performances', 'Video websites'], a: 1 },
+    { q: 'According to the chart, what percentage of teenagers mainly listen to music on video websites?', o: ['13%', '31%', '46%', '77%'], a: 1 },
+    { q: 'What does the high school student say about concerts?', o: ['They are too expensive', 'They are too loud', 'The tickets sell out too fast', 'Singing together with thousands of people gives a feeling a phone cannot'], a: 3 },
+    { q: 'What does the music teacher recommend?', o: ['Buying more CDs', 'Learning a traditional instrument', 'Sometimes turning off the screen and listening closely to a whole song', 'Listening only to live music'], a: 2 }
+  ]
+},
+{
+  id: 'R28', type: 'corr', unit: 4, title: '給客服中心的信',
+  intro: 'Read the following email.',
+  meta: { from: '陳怡君', to: '快樂購物網客服中心', subject: '商品問題（訂單編號 A20931）' },
+  paras: [
+    '客服人員您好：',
+    '我在十月三日向貴公司訂購了一副無線耳機（訂單編號 A20931）。網頁上寫著「三天內到貨」，但是我一直等到十月十二日才收到商品。',
+    '更讓我失望的是，打開盒子以後，我發現耳機的顏色是黑色的，而我訂的是白色。另外，右邊的耳機充電以後完全沒有聲音，我試了好幾次都一樣。',
+    '這副耳機是我準備送給弟弟的生日禮物，他的生日是十月十五日，現在已經來不及換貨了。因此，我希望貴公司能夠全額退費，並且負擔退貨的運費。',
+    '我已經把商品的照片和訂單資料放在附件裡，請您確認。希望能在三天內收到您的回覆。如果問題沒有解決，我將向消費者保護單位反映。',
+    '謝謝您的協助。',
+    '陳怡君　敬上'
+  ],
+  questions: [
+    { q: 'Why is the writer sending this email?', o: ['To order another pair of earphones', 'To complain about an order and ask for a refund', 'To thank the company for fast delivery', 'To ask how to charge the earphones'], a: 1 },
+    { q: 'Which problem is NOT mentioned in the email?', o: ['The delivery was late', 'The color was wrong', 'One earphone does not work', 'The price was higher than advertised'], a: 3 },
+    { q: 'Why does the writer want a refund instead of an exchange?', o: ['There is not enough time before her brother’s birthday', 'She found a cheaper pair elsewhere', 'Her brother does not like earphones', 'The store has no white ones left'], a: 0 },
+    { q: 'What will the writer do if the problem is not solved?', o: ['Write a review online', 'Visit the store in person', 'Report it to a consumer protection agency', 'Order from the company again'], a: 2 },
+    { q: 'Which best describes the tone of the email?', o: ['Friendly and casual', 'Firm but polite', 'Angry and rude', 'Apologetic'], a: 1 }
+  ]
+},
+{
+  id: 'R29', type: 'promo', unit: 6, title: '賞螢生態之旅',
+  intro: 'Read the following poster.',
+  ad: [
+    ['h', '山林夜未眠　賞螢生態之旅'],
+    ['li', '活動日期：四月十日至五月十日，每週五、六晚上'],
+    ['li', '集合時間、地點：晚上 6:00，自然教育中心門口'],
+    ['li', '活動內容：6:00 生態講座 → 7:00 夜間步道導覽 → 8:30 結束'],
+    ['li', '費用：大人 250 元，國中以下學生 150 元（含導覽和保險）'],
+    ['li', '名額：每場 25 人，請在活動三天前上網報名'],
+    ['b', '賞螢三不'],
+    ['li', '不使用手電筒和閃光燈（導覽員會提供包著紅色玻璃紙的小燈）'],
+    ['li', '不捕捉螢火蟲'],
+    ['li', '不大聲說話'],
+    ['star', '請穿長袖、長褲和好走的鞋子；不要噴防蚊液，因為會傷害螢火蟲'],
+    ['star', '如果下大雨，活動取消，費用全額退還']
+  ],
+  questions: [
+    { q: 'What activity is being advertised?', o: ['A guided night walk to watch fireflies', 'A camping trip in the mountains', 'A class on catching insects', 'A photography contest'], a: 0 },
+    { q: 'What happens first?', o: ['A walk along the trail', 'A talk about ecology', 'A group photo', 'A dinner at the center'], a: 1 },
+    { q: 'Why are participants asked not to use insect repellent?', o: ['It smells bad', 'It is not allowed in the center', 'It harms the fireflies', 'It attracts mosquitoes'], a: 2 },
+    { q: 'Two adults and one elementary school student sign up. What is the total cost?', o: ['NT$550', 'NT$650', 'NT$700', 'NT$750'], a: 1 },
+    { q: 'What happens if it rains heavily?', o: ['The talk is held indoors only', 'The walk is moved to the next evening', 'Participants receive a discount', 'The activity is canceled and the fee is refunded in full'], a: 3 }
+  ]
+},
+{
+  id: 'R30', type: 'lit', unit: 3, title: '奶奶的歌',
+  intro: 'Read the following passage.',
+  paras: [
+    '奶奶不識字，卻會唱很多歌。那些歌沒有歌譜，也沒有人知道是誰寫的，是她的媽媽唱給她聽，她再唱給我爸爸聽的。',
+    '小時候，每到夏天的晚上，奶奶就搬一張竹椅坐在院子裡，一邊搖著扇子，一邊用客家話輕輕地唱。我聽不懂歌詞，只記得那個調子慢慢的、軟軟的，像晚風一樣。聽著聽著，我就在她腿上睡著了。',
+    '上了中學以後，我的耳機裡裝滿了流行歌，奶奶的歌漸漸被我忘了。有一次她又唱起來，我不耐煩地說：「奶奶，這種歌現在沒有人聽了啦。」她笑了笑，沒有再唱。',
+    '去年，音樂老師要我們訪問家裡的長輩，錄下一首他們年輕時候的歌。我拿著手機走到奶奶面前，她愣了一下，有點不好意思地清了清喉嚨。當那個熟悉的調子響起來的時候，我的眼睛忽然熱了。',
+    '我請爸爸把歌詞一句一句翻譯給我聽，才知道那是一首勸人珍惜時間的歌。現在，那段錄音還存在我的手機裡。我想，等我學會了，也要唱給我的孩子聽。'
+  ],
+  questions: [
+    { q: 'How did the grandmother learn her songs?', o: ['From the radio', 'From her mother, who sang them to her', 'From a songbook', 'From a music teacher'], a: 1 },
+    { q: 'Why did the narrator fall asleep to the songs as a child?', o: ['The melody was slow and soothing', 'The words were boring', 'The songs were very long', 'The summer nights were hot'], a: 0 },
+    { q: 'How did the narrator’s attitude change in middle school?', o: ['The narrator began to sing along', 'The narrator asked to learn Hakka', 'The narrator lost interest and called the songs out of date', 'The narrator recorded the songs'], a: 2 },
+    { q: 'What led the narrator to record the grandmother’s song?', o: ['A family reunion', 'The grandmother’s birthday', 'A singing contest', 'An assignment from a music teacher'], a: 3 },
+    { q: 'What does the last paragraph suggest?', o: ['The narrator still cannot stand the song', 'The narrator now treasures the song and wants to pass it on', 'The narrator plans to become a singer', 'The grandmother has stopped singing'], a: 1 }
+  ]
+}
+);
+
+// Batch 2 (Nov 2026): 8 more picture stories (S09–S16), 12 more emails (E13–E24) and
+// 36 more character-choice items. Same formats as data_writing.js and data_toolkit.js.
+APZH.stories.push(
+{
+  id: 'S09', unit: 6, title: '搭錯公車',
+  panels: [
+    { bg: 'street', desc: 'A boy listening to music waits at a bus stop for bus 12. A bus marked 21 pulls up and he gets on without looking carefully.',
+      items: [['#等 12 路', 20, 16, 7], ['🚏', 20, 50, 26], ['👦', 42, 62, 17], ['🎵', 54, 40, 9], ['#21', 78, 30, 9], ['🚌', 78, 62, 32]] },
+    { bg: 'park', desc: 'On the bus he looks out the window and sees mountains and fields he does not recognize. He realizes he is on the wrong bus.',
+      items: [['⛰️', 80, 40, 30], ['🌾', 64, 84, 10], ['🌾', 90, 86, 9], ['🚌', 32, 64, 38], ['@😨', 58, 28, 10]] },
+    { bg: 'street', desc: 'He gets off and asks a police officer for help. The officer points to the bus stop across the street for the bus back.',
+      items: [['👦', 28, 62, 17], ['@❓', 30, 32, 9], ['👮', 54, 60, 18, 'f'], ['👉', 70, 56, 10], ['🚏', 88, 48, 24]] },
+    { bg: 'school', desc: 'He finally reaches school late and out of breath. The clock shows nine, and he explains to his teacher what happened.',
+      items: [['🕘', 50, 20, 12], ['🏫', 22, 50, 32], ['👦', 54, 64, 16], ['💦', 66, 50, 8], ['👩‍🏫', 82, 62, 17, 'f']] }
+  ]
+},
+{
+  id: 'S10', unit: 5, title: '第一次做菜',
+  panels: [
+    { bg: 'home', desc: 'A girl watches a cooking video on a laptop and decides to cook dinner for her parents.',
+      items: [['👧', 30, 62, 18], ['💻', 60, 66, 26], ['@🍳', 62, 28, 11]] },
+    { bg: 'street', desc: 'She goes to the market with a basket and buys tomatoes, eggs and vegetables from a vendor.',
+      items: [['#菜市場', 50, 15, 8], ['👧', 24, 64, 16], ['🧺', 40, 78, 12], ['🍅', 56, 66, 10], ['🥚', 66, 68, 9], ['🥬', 76, 66, 10], ['👵', 90, 54, 15, 'f']] },
+    { bg: 'kitchen', desc: 'In the kitchen things go wrong: the pan catches fire and smokes, and she pours in far too much salt.',
+      items: [['👧', 22, 58, 16], ['@😰', 24, 28, 9], ['🍳', 52, 72, 20], ['🔥', 52, 50, 12], ['💨', 64, 28, 14], ['🧂', 78, 70, 13]] },
+    { bg: 'home', desc: 'At dinner her parents find the dish very salty and reach for water, but they give her a thumbs up for trying. She decides to try again next week.',
+      items: [['👨', 18, 56, 16], ['@😖', 20, 26, 9], ['🥤', 34, 80, 10], ['🍛', 50, 82, 14], ['👧', 50, 56, 15], ['👩', 82, 56, 16, 'f'], ['👍', 68, 36, 10]] }
+  ]
+},
+{
+  id: 'S11', unit: 1, title: '撿到錢包',
+  panels: [
+    { bg: 'park', desc: 'Walking home through the park, a girl notices a wallet left on a chair.',
+      items: [['🌳', 86, 42, 26], ['🪑', 58, 72, 18], ['👛', 58, 58, 10], ['👧', 26, 62, 17], ['@❗', 38, 32, 9]] },
+    { bg: 'park', desc: 'She opens it and finds money and a card showing that it belongs to an elderly man.',
+      items: [['🌳', 12, 44, 24], ['👧', 34, 62, 17], ['👛', 52, 68, 11], ['💵', 64, 60, 11], ['@👴', 74, 30, 11]] },
+    { bg: 'street', desc: 'She takes the wallet to the police station and hands it to an officer.',
+      items: [['#警察局', 60, 15, 8], ['🏢', 62, 48, 30], ['👧', 24, 64, 16], ['👛', 38, 72, 9], ['👮', 86, 62, 16, 'f']] },
+    { bg: 'home', desc: 'The elderly man gets his wallet back. He comes to thank her and gives her some fruit. She is glad she did the right thing.',
+      items: [['👴', 26, 58, 18], ['@🙏', 28, 26, 10], ['🍎', 46, 72, 10], ['🍊', 56, 76, 9], ['👧', 74, 62, 16, 'f']] }
+  ]
+},
+{
+  id: 'S12', unit: 6, title: '我們的菜園',
+  panels: [
+    { bg: 'park', desc: 'On a sunny spring day, two classmates plant seedlings in the school garden.',
+      items: [['☀️', 84, 18, 13], ['👦', 24, 60, 16], ['👧', 46, 62, 16], ['🌱', 64, 82, 11], ['🌱', 78, 84, 11], ['🌱', 92, 82, 11]] },
+    { bg: 'park', desc: 'They water the garden every day, and the vegetables and carrots grow bigger.',
+      items: [['📅', 14, 22, 12], ['👧', 24, 60, 16], ['💦', 42, 68, 10], ['🥬', 58, 80, 14], ['🥬', 74, 82, 14], ['🥕', 90, 80, 12]] },
+    { bg: 'rain', desc: 'One night a heavy storm knocks the vegetables over. The next morning the students are upset.',
+      items: [['🌧️', 26, 16, 15], ['💨', 66, 26, 15], ['🥬', 34, 82, 13, 'r70'], ['🥬', 56, 84, 13, 'r-80'], ['👦', 84, 62, 15], ['@😢', 80, 32, 9]] },
+    { bg: 'park', desc: 'They repair the garden and replant. Weeks later they harvest a basket of vegetables and share them with their teacher.',
+      items: [['👦', 18, 60, 15], ['👧', 36, 62, 15], ['🧺', 56, 78, 15], ['🥕', 52, 64, 9], ['🥬', 62, 64, 9], ['👩‍🏫', 84, 58, 16, 'f'], ['@😊', 48, 28, 9]] }
+  ]
+},
+{
+  id: 'S13', unit: 6, title: '颱風夜',
+  panels: [
+    { bg: 'home', desc: 'The family sees on the TV news that a typhoon will arrive tonight.',
+      items: [['📺', 24, 58, 30], ['🌀', 24, 54, 11], ['👨', 58, 62, 15], ['👩', 74, 62, 15], ['👦', 90, 68, 12]] },
+    { bg: 'street', desc: 'They hurry to the supermarket and fill a cart with canned food, a flashlight and candles.',
+      items: [['#超市', 50, 15, 8], ['👨', 18, 60, 15], ['🛒', 42, 74, 22], ['🥫', 40, 58, 9], ['🔦', 60, 60, 10], ['🕯️', 72, 64, 10], ['👦', 88, 64, 14, 'f']] },
+    { bg: 'night', desc: 'That night the power goes out. The family lights a candle and plays cards together, and the boy finds it fun.',
+      items: [['🌧️', 82, 16, 13], ['👨', 18, 58, 15], ['🕯️', 50, 58, 14], ['🃏', 36, 80, 10], ['🃏', 64, 80, 10], ['👩', 82, 58, 15, 'f'], ['👦', 50, 86, 12], ['@😄', 66, 34, 8]] },
+    { bg: 'park', desc: 'The next morning the sun is out. The boy and an elderly neighbor sweep up the fallen leaves and branches together.',
+      items: [['☀️', 84, 18, 13], ['🌳', 12, 44, 24], ['👦', 34, 62, 15], ['🧹', 50, 66, 16], ['🍂', 44, 86, 10], ['🍂', 60, 88, 9], ['👵', 78, 60, 15, 'f']] }
+  ]
+},
+{
+  id: 'S14', unit: 3, title: '才藝表演',
+  panels: [
+    { bg: 'home', desc: 'A girl practices the violin at home every day. The school talent show is marked on the calendar.',
+      items: [['#才藝表演', 18, 18, 7], ['📅', 18, 36, 12], ['👧', 46, 60, 18], ['🎻', 62, 64, 15], ['🎵', 76, 34, 10]] },
+    { bg: 'stage', desc: 'Backstage before her turn, she is so nervous that she is sweating and her hands shake.',
+      items: [['👧', 42, 60, 18], ['@😰', 58, 30, 10], ['💦', 30, 46, 8], ['🎻', 66, 70, 14]] },
+    { bg: 'stage', desc: 'On stage she plays a wrong note and stops. The audience claps to encourage her.',
+      items: [['👧', 46, 50, 16], ['🎻', 60, 54, 13], ['💥', 70, 40, 9], ['👏', 20, 86, 11], ['👏', 50, 90, 11], ['👏', 80, 86, 11]] },
+    { bg: 'stage', desc: 'She takes a deep breath, finishes the piece and bows. Her mother comes up with flowers.',
+      items: [['🎉', 18, 28, 13], ['👧', 46, 56, 17], ['@😊', 36, 26, 9], ['💐', 64, 66, 13], ['👩', 82, 58, 16, 'f']] }
+  ]
+},
+{
+  id: 'S15', unit: 4, title: '奶奶的新手機',
+  panels: [
+    { bg: 'home', desc: 'Grandma has a new smartphone but has no idea how to use it. Her grandson notices.',
+      items: [['👵', 36, 60, 19], ['📱', 54, 70, 13], ['@❓', 52, 30, 10], ['👦', 86, 66, 14, 'f']] },
+    { bg: 'home', desc: 'Her grandson patiently shows her, step by step, how to make a video call.',
+      items: [['👵', 30, 60, 18], ['@💡', 30, 28, 10], ['📱', 48, 72, 12], ['👉', 58, 64, 9, 'f'], ['👦', 72, 62, 17, 'f']] },
+    { bg: 'home', desc: 'Grandma writes the steps in a notebook and practices again and again by herself.',
+      items: [['🕐', 84, 20, 11], ['👵', 38, 60, 19], ['📱', 56, 68, 12], ['📝', 74, 78, 12]] },
+    { bg: 'home', desc: 'A week later Grandma video-calls her daughter overseas all by herself. Her grandson gives her a thumbs up.',
+      items: [['👵', 24, 60, 18], ['@❤️', 26, 28, 10], ['📱', 56, 56, 30], ['👩', 56, 54, 10], ['👦', 86, 68, 13, 'f'], ['👍', 84, 44, 9]] }
+  ]
+},
+{
+  id: 'S16', unit: 2, title: '過年',
+  panels: [
+    { bg: 'home', desc: 'It is the day before Lunar New Year. The whole family cleans the house together.',
+      items: [['#除夕', 84, 16, 8], ['📅', 84, 34, 11], ['👨', 18, 58, 15], ['🧹', 32, 64, 15], ['👩', 52, 58, 15], ['🧽', 64, 50, 9], ['👧', 78, 68, 13]] },
+    { bg: 'home', desc: 'The children put the character 福 and red decorations on the front door.',
+      items: [['🚪', 50, 58, 32], ['#福', 50, 44, 13], ['👦', 22, 64, 16], ['👧', 78, 64, 16, 'f'], ['🏮', 16, 22, 10], ['🏮', 84, 22, 10]] },
+    { bg: 'night', desc: 'That evening three generations sit down to the reunion dinner, with fish and dumplings on the table.',
+      items: [['👴', 14, 54, 14], ['👵', 30, 54, 14], ['👧', 50, 52, 12], ['👨', 70, 54, 14], ['👩', 86, 54, 14], ['🐟', 36, 80, 13], ['🥟', 52, 84, 11], ['🍲', 66, 80, 13]] },
+    { bg: 'nightout', desc: 'After dinner the grandparents give the children red envelopes, and the family watches fireworks together.',
+      items: [['🎆', 22, 20, 17], ['🎇', 78, 18, 15], ['👴', 26, 62, 16], ['🧧', 44, 68, 11], ['👧', 62, 64, 15, 'f'], ['👦', 80, 64, 15, 'f'], ['@😄', 62, 36, 9]] }
+  ]
+}
+);
+
+APZH.emails.push(
+{ id: 'E13', unit: 1, register: 'informal', from: '林小傑（表弟）', subject: '想養寵物',
+  body: ['表姊：', '我最近好想養一隻寵物，可是爸媽上班都很忙，我自己也要上學。你覺得像我們這樣的家庭，養什麼寵物比較合適？為什麼？還有，我要怎麼說，爸媽才會答應呢？', '小傑'] },
+{ id: 'E14', unit: 5, register: 'formal', from: '吳老師（體育老師）', subject: '新的運動社團',
+  body: ['各位同學：', '下學期學校計畫增加一個新的運動社團，想先了解大家的想法。你希望學校成立哪一種運動社團？為什麼？另外，你覺得這個社團一個星期應該練習幾次、在什麼時間練習比較好？謝謝大家！', '吳老師'] },
+{ id: 'E15', unit: 6, register: 'informal', from: '黃子晴（臺北的筆友）', subject: '放颱風假',
+  body: ['嗨！', '昨天颱風來，我們放了一天假，我在家看了一整天的書。你住的地方有沒有因為天氣不好而停課的時候？那一天你通常會做什麼？還有，你們那裡的人平常怎麼為壞天氣做準備？', '子晴'] },
+{ id: 'E16', unit: 3, register: 'formal', from: '鄭小姐（市立美術館）', subject: '青少年參觀活動',
+  body: ['您好：', '本館希望吸引更多中學生來參觀，正在向年輕朋友請教。您覺得中學生對哪一類的藝術作品最有興趣？為什麼？另外，您認為美術館可以舉辦什麼樣的活動，讓參觀變得更有趣？謝謝您寶貴的意見！', '市立美術館　鄭小姐'] },
+{ id: 'E17', unit: 4, register: 'informal', from: '趙安安（同學）', subject: '買手機還是買平板',
+  body: ['欸，', '我存了一筆零用錢，想買一樣東西來幫助學習，可是不知道該買手機還是平板。你覺得哪一個比較適合？為什麼？還有，我很怕買了以後一直玩遊戲，你有什麼好方法可以控制使用時間嗎？', '安安'] },
+{ id: 'E18', unit: 2, register: 'formal', from: '周校長（中文學校）', subject: '說故事比賽',
+  body: ['各位同學：', '學校下個月要舉辦中文說故事比賽，歡迎大家報名。如果你參加，你想說哪一個故事？為什麼？另外，有些同學比較害羞，不敢上台，你覺得學校可以怎麼鼓勵他們參加？', '周校長'] },
+{ id: 'E19', unit: 5, register: 'informal', from: '許大維（臺灣的表哥）', subject: '下個月去找你',
+  body: ['嗨！', '告訴你一個好消息：下個月我要到美國找你玩一個星期！你打算帶我去哪些地方？為什麼？還有，你們那裡有什麼好吃的東西，是我一定要嘗嘗的？', '大維'] },
+{ id: 'E20', unit: 1, register: 'formal', from: '社區活動中心　高主任', subject: '重陽節敬老活動',
+  body: ['您好：', '重陽節快到了，本中心想請青少年和社區的長輩一起參加活動。您覺得年輕人可以和長輩一起做什麼活動？為什麼？另外，您認為年輕人可以從長輩身上學到什麼？期待您的回覆。', '社區活動中心　高主任'] },
+{ id: 'E21', unit: 6, register: 'formal', from: '市政府公園管理處', subject: '新公園的設計',
+  body: ['各位市民：', '本市計畫在您住的社區附近蓋一座新公園，想聽聽居民的意見。您希望新公園裡有哪些設施？為什麼？另外，您覺得居民可以怎麼幫忙，讓公園保持乾淨？謝謝您！', '公園管理處　敬上'] },
+{ id: 'E22', unit: 3, register: 'informal', from: '白可欣（好朋友）', subject: '學校音樂會',
+  body: ['嗨～', '老師要我在下個月的學校音樂會上表演一首歌，可是我還沒決定唱什麼。你覺得我應該選什麼樣的歌？為什麼？還有，我一上台就很緊張，你有什麼方法可以讓我不那麼害怕？', '可欣'] },
+{ id: 'E23', unit: 4, register: 'formal', from: '羅老師（科學老師）', subject: '科學展覽',
+  body: ['同學們好：', '明年春天學校要舉辦科學展覽，每位同學都要準備一個研究題目。你想研究什麼題目？為什麼？另外，做這個研究的時候，你需要老師或學校提供哪些幫助？請在下週五以前回信。', '羅老師'] },
+{ id: 'E24', unit: 2, register: 'informal', from: '田小華（高雄的筆友）', subject: '學英文好難',
+  body: ['你好！', '我最近在學英文，覺得單字好難記，常常背了又忘。你學中文的時候，是用什麼方法記住生字的？還有，你覺得看電影或是聽歌，對學語言有幫助嗎？為什麼？', '小華'] }
+);
+
+// More same-sound character choices for the 選字 drill: [sentence, [three options], index of the correct one].
+APZH.homophones.push(
+  ['今天的＿＿很好，適合去郊遊。', ['天氣', '天器', '天汽'], 0],
+  ['他從小的＿＿是當醫生。', ['夢像', '夢想', '夢響'], 1],
+  ['這本小說的＿＿很精彩。', ['內榮', '內溶', '內容'], 2],
+  ['弟弟＿＿把花瓶打破了。', ['不小心', '不小新', '不曉心'], 0],
+  ['這個問題很＿＿，我想不出答案。', ['付雜', '複雜', '復雜'], 1],
+  ['爺爺每天早上去公園＿＿。', ['韻動', '運洞', '運動'], 2],
+  ['她的中文說得很＿＿。', ['流利', '留利', '流力'], 0],
+  ['除夕晚上，全家人一起吃＿＿飯。', ['團員', '團圓', '團園'], 1],
+  ['請＿＿時間，不要遲到。', ['住意', '注義', '注意'], 2],
+  ['這家餐廳的服務＿＿很好。', ['態度', '太度', '態渡'], 0],
+  ['他對音樂很有＿＿。', ['興去', '興趣', '幸趣'], 1],
+  ['我＿＿帶作業了。', ['望記', '忘紀', '忘記'], 2],
+  ['這次旅行讓我＿＿深刻。', ['印象', '印像', '映象'], 0],
+  ['請大家＿＿順序排隊。', ['安照', '按照', '按造'], 1],
+  ['他＿＿了很多困難，終於成功了。', ['客服', '刻服', '克服'], 2],
+  ['老師＿＿我們多讀課外書。', ['鼓勵', '古勵', '鼓力'], 0],
+  ['我們要＿＿用水，不要浪費。', ['結約', '節約', '節月'], 1],
+  ['這件衣服的＿＿很特別。', ['社計', '設記', '設計'], 2],
+  ['我們應該＿＿長輩。', ['尊敬', '遵敬', '尊境'], 0],
+  ['過馬路要＿＿交通規則。', ['尊守', '遵守', '遵手'], 1],
+  ['這個城市的＿＿很發達。', ['郊通', '交痛', '交通'], 2],
+  ['他＿＿自己一定能考上。', ['相信', '想信', '相性'], 0],
+  ['媽媽在＿＿買了很多蔬菜和水果。', ['超是', '超市', '抄市'], 1],
+  ['上課的時候要＿＿聽講。', ['磚心', '專新', '專心'], 2],
+  ['這裡的＿＿很美，吸引了很多遊客。', ['風景', '風警', '封景'], 0],
+  ['她＿＿把這個好消息告訴我。', ['力刻', '立刻', '立客'], 1],
+  ['多吃蔬菜對身體＿＿。', ['有意', '友益', '有益'], 2],
+  ['這是我第一次＿＿飛機。', ['坐', '做', '作'], 0],
+  ['我正在＿＿功課，等一下再出去玩。', ['坐', '做', '座'], 1],
+  ['請回到你的＿＿位。', ['坐', '做', '座'], 2],
+  ['你想去＿＿裡玩？', ['哪', '那', '拿'], 0],
+  ['他長得很＿＿爸爸。', ['向', '像', '象'], 1],
+  ['一直＿＿前走，就到圖書館了。', ['像', '象', '向'], 2],
+  ['出門記得＿＿口罩。', ['戴', '帶', '代'], 0],
+  ['明天會下雨，記得＿＿雨傘。', ['戴', '帶', '待'], 1],
+  ['我對這次比賽很有＿＿。', ['新心', '信新', '信心'], 2]
+);
 
 // Cross-device sync: the family's existing Firebase project (the one 小寵物中文練習店 uses).
 // This is Firebase's public web config, not a secret; access is governed by the Firestore rules.
