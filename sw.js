@@ -1,4 +1,4 @@
-const CACHE = 'apzh-66eff5b87d';
+const CACHE = 'apzh-9756a8505e';
 const CORE = ['./', 'manifest.webmanifest', 'icons/icon-192.png', 'icons/icon-512.png', 'icons/apple-touch-icon.png'];
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(CORE)).then(() => self.skipWaiting()));
